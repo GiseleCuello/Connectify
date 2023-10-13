@@ -13,6 +13,10 @@ const clientSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
   },
@@ -20,8 +24,9 @@ const clientSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  CustomerComments: {
-    type: Array,
+  professionalRef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Professional",
   },
 });
 
