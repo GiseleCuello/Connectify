@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+console.log("PROBANDO ANDO...!!")
 const AdminSchema = mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true },
