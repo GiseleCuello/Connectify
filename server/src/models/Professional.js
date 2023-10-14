@@ -58,6 +58,14 @@ const professionalSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Referencia al usuario creador
+  },
+  professional: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Professional",
+  }
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);
