@@ -53,6 +53,11 @@ const professionalSchema = mongoose.Schema({
       },
     ],
   },
+  isDeleted: {
+    // Inicialmente, no se ha borrado lógicamente
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);
