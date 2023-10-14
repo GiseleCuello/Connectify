@@ -9,6 +9,10 @@ const professionalSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
@@ -18,6 +22,10 @@ const professionalSchema = mongoose.Schema({
     required: true,
   },
   profession: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },
@@ -34,13 +42,30 @@ const professionalSchema = mongoose.Schema({
     required: true,
   },
   CustomerComments: {
-    type: Array,
+    type: [
+      {
+        comment: String,
+        date: Date,
+        client: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Client",
+        },
+      },
+    ],
   },
   isDeleted: {
     // Inicialmente, no se ha borrado lógicamente
     type: Boolean,
     default: false,
   },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Referencia al usuario creador
+  },
+  professional: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Professional",
+  }
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);
