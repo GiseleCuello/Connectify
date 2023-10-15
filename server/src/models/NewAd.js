@@ -26,7 +26,7 @@ const newAdSchema = new mongoose.Schema({
     },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Professional',
         required: true,
     },
     categories: [String],
