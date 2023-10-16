@@ -27,10 +27,7 @@ const professionalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rate: {
-    type: Number,
-    default: 0,
-  },
+
   profession: {
     type: [String],
     required: true,
@@ -65,21 +62,8 @@ const professionalSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-
-  CustomerComments: {
-    type: [
-      {
-        comment: String,
-        date: Date,
-        client: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Client",
-        },
-      },
-    ],
-  },
   isDeleted: {
-    // Inicialmente, no se ha borrado lógicamente
+    // Inicialmente, no se ha borrado lógicamentenpm install bcrypt
     type: Boolean,
     default: false,
   },
@@ -87,6 +71,46 @@ const professionalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Professional", // Referencia al usuario creador
   },
+  clientComments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
+  createdAds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "NewAd",
+    },
+  ],
+  payments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Payment",
+    },
+  ],
+});
+
+professionalSchema.pre("save", function (next) {
+  const professional = this;
+
+  if (!professional.isModified("password")) {
+    return next();
+  }
+
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) {
+      return next(err);
+    }
+
+    bcrypt.hash(professional.password, salt, (err, hash) => {
+      if (err) {
+        return next(err);
+      }
+      professional.password = hash;
+      next();
+    });
+  });
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);
