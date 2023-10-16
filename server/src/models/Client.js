@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const clientSchema = mongoose.Schema({
+const clientSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -9,9 +9,15 @@ const clientSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -20,9 +26,15 @@ const clientSchema = mongoose.Schema({
   image: {
     type: String,
   },
-  address: {
-    type: String,
-    required: true,
+  adress: {
+    province: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
   },
   isDeleted: {
     // Inicialmente, no se ha borrado lógicamente

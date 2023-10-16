@@ -1,13 +1,23 @@
 const mongoose = require("mongoose");
 
-const professionalSchema = mongoose.Schema({
+const professionalSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -19,28 +29,44 @@ const professionalSchema = mongoose.Schema({
   },
   rate: {
     type: Number,
-    required: true,
+    default: 0,
   },
   profession: {
-    type: String,
+    type: [String],
     required: true,
   },
   description: {
     type: String,
     required: true,
   },
-  address: {
-    type: String,
-    required: true,
+  adress: {
+    province: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+  },
+  workingRange: {
+    provinceJob: {
+      type: [String],
+    },
+    locationJob: {
+      type: [String],
+    },
   },
   price: {
     type: Number,
-    required: true,
+    default: 1000,
   },
   remoteWork: {
     type: Boolean,
     required: true,
   },
+
+
   CustomerComments: {
     type: [
       {
@@ -62,6 +88,7 @@ const professionalSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Professional', // Referencia al usuario creador
   },
+
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);
