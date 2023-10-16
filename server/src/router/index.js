@@ -2,7 +2,7 @@ const router = require("express").Router();
 const adminRoute = require("./adminRoute");
 const clientRoute = require("./clientRoute");
 const professionalRoute = require("./professionalRoute");
-const commentsRoute = require("./commentsRoute");
+const commentsRoute = require("./commentsRouter");
 const adsRoute = require("./adsRoute");
 
 router.use("/client", clientRoute);
