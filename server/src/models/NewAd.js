@@ -32,7 +32,10 @@ const newAdSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  categories: [String],
+  categories: {
+    type: [String],
+    required: true
+  },
   contractType: {
     type: String,
     enum: ["Full-time", "Part-time", "Freelance", "Other"],
