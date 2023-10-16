@@ -18,9 +18,3 @@ module.exports = clientRoute;
 //     { res.status(500).json({ error: 'Error al realizar el borrado lógico del perfil del usuario.' })
 //   } else { res.json({ message: 'Borrado lógico del perfil del usuario exitoso.' })
 //   }}})
-
-//! En el controlador de registro de usuario, antes de almacenar la contraseña en la base de datos const
-// plainTextPassword = 'contraseñaDelUsuario'; // Reemplaza esto con la contraseña proporcionada por el
-// usuario bcrypt.hash(plainTextPassword, 10, (err, hashedPassword) => { if (err) { // Manejar errores
-// } else { // Almacenar 'hashedPassword' en la base de datos
-// } });
