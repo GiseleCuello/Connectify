@@ -36,7 +36,7 @@ adminSchema.pre("save", function (next) {
         return next(err);
       }
       admin.password = hash;
-      next();
+      next();npm
     });
   });
 });
