@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const adminSchema = mongoose.Schema({
     username: {
         type: String,
@@ -20,3 +21,4 @@ const adminSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("Admin", adminSchema);
+
