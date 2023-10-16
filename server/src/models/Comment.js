@@ -9,6 +9,11 @@ const commentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  ranking: {
+    type: Number,
+    min: 1,
+    max: 5,
+  },
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
@@ -20,4 +25,3 @@ const commentSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Comment", commentSchema);
-
