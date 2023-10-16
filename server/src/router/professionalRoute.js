@@ -1,11 +1,9 @@
 const professionalRoute = require("express").Router();
-const {
-  professionalRegister,
-  professionalLogin,
-  professionalSearch,
-  getProfessionalById,
-  professionalDelete,
-} = require("../controllers/professional");
+const professionalRegister = require("../controllers/Professional/professionalRegister");
+const getProfessionalById = require("../controllers/Professional/getProfessionalById");
+const professionalDelete = require("../controllers/Professional/ProfessionalDelete");
+const professionalLogin = require("../controllers/Professional/professionalLogin");
+const professionalSearch = require("../controllers/Professional/professionalSearch");
 
 professionalRoute.post("/register", professionalRegister); // Guarda los profesionales desde la base de datos
 
