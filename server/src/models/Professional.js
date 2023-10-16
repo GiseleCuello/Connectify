@@ -36,7 +36,7 @@ const professionalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  adress: {
+  address: {
     province: {
       type: String,
       required: true,
@@ -62,7 +62,6 @@ const professionalSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-
   isDeleted: {
     // Inicialmente, no se ha borrado lógicamentenpm install bcrypt
     type: Boolean,
