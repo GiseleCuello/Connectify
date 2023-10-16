@@ -39,7 +39,7 @@ const professionalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  adress: {
+  address: {
     province: {
       type: String,
       required: true,
@@ -66,7 +66,6 @@ const professionalSchema = new mongoose.Schema({
     required: true,
   },
 
-
   CustomerComments: {
     type: [
       {
@@ -86,9 +85,8 @@ const professionalSchema = new mongoose.Schema({
   },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Professional', // Referencia al usuario creador
+    ref: "Professional", // Referencia al usuario creador
   },
-
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);
