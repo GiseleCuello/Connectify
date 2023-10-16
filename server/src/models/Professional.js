@@ -65,6 +65,30 @@ const professionalSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+
+
+  CustomerComments: {
+    type: [
+      {
+        comment: String,
+        date: Date,
+        client: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Client",
+        },
+      },
+    ],
+  },
+  isDeleted: {
+    // Inicialmente, no se ha borrado lógicamente
+    type: Boolean,
+    default: false,
+  },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Professional', // Referencia al usuario creador
+  },
+
 });
 
 module.exports = mongoose.model("Professional", professionalSchema);

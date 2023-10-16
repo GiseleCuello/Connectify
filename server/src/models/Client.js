@@ -36,10 +36,15 @@ const clientSchema = new mongoose.Schema({
       required: true,
     },
   },
-  professionalRef: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Professional",
+  isDeleted: {
+    // Inicialmente, no se ha borrado lógicamente
+    type: Boolean,
+    default: false,
   },
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Client",
+  }
 });
 
 module.exports = mongoose.model("Client", clientSchema);

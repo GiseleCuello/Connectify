@@ -1,0 +1,2 @@
+#### Traer Clientes
+GET http://localhost:3001/client/
