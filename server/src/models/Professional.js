@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const professionalSchema = new mongoose.Schema({
   name: {

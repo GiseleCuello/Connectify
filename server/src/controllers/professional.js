@@ -32,15 +32,13 @@ const professionalRegister = async (req, res) => {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
 
-    const newPassword = await bcrypt.hash(password, 10);
-
     const newProfessional = new Professional({
       name,
       lastName,
       username,
       email,
       image,
-      password: newPassword,
+      password,
       address,
       profession,
       description,
