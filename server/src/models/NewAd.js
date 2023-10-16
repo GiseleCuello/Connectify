@@ -32,15 +32,24 @@ const newAdSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  categories: [String],
+  categories: {
+    type: [String],
+    required: true,
+  },
   contractType: {
     type: String,
     enum: ["Full-time", "Part-time", "Freelance", "Other"],
+    required: true,
   },
   workLocation: {
     type: String,
     enum: ["Presencial", "Remoto"],
     required: true,
+  },
+  isDeleted: {
+    // Inicialmente, no se ha borrado lógicamentenpm install bcrypt
+    type: Boolean,
+    default: false,
   },
 });
 
