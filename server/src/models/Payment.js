@@ -1,27 +1,52 @@
 const mongoose = require("mongoose");
 
+const paymentHistorySchema = new mongoose.Schema({
+  status: {
+    type: String,
+    required: true,
+  },
+  paymentDate: {
+    default: Date.now,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+});
+
 const paymentSchema = new mongoose.Schema({
-    amount: {
-        type: Number,
-        required: true,
+  amount: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+
+  paymentMethod: {
+    type: String,
+    required: true,
+  },
+  paymentHistory: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PaymentHistory",
     },
-    date: {
-        type: Date,
-        default: Date.now,
+  ],
+
+  professional: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Professional",
     },
-    professional: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Professional",
+  ],
+  client: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
     },
-    client: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Client",
-    },
-    paymentMethod: {
-        type: String,
-        required: true,
-    },
-    // Añadir luego otras propiedades relacionadas con el pago, como número de factura, estado, etc.
+  ],
 });
 
 module.exports = mongoose.model("Payment", paymentSchema);

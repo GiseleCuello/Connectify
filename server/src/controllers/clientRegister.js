@@ -1,26 +1,26 @@
-const Client = require('../models/Client')
+const Client = require("../models/Client");
 
+const clientRegister = async (req, res) => {
+  try {
+    const { name, lastName, email, image, address, password } = req.body;
 
-exports.clientRegister = async (req, res) => {
-    try {
-        const { name, lastName, email, image, address, password } = req.body;
+    // Crea una nueva instancia de Cliente utilizando el modelo
 
-        // Crea una nueva instancia de Cliente utilizando el modelo
+    const newClient = new Client({
+      name,
+      lastName,
+      email,
+      image,
+      password,
+      address,
+    });
 
-        const newClient = new Client({
-            name,
-            lastName,
-            email,
-            image,
-            password,
-            address,
-        });
+    await newClient.save();
 
-        await newClient.save();
-
-        res.status(201).json({ message: 'Successfully registered client.' });
-
-    } catch (error) {
-        res.status(500).json({ error: 'Error registering client.' });
-    }
+    res.status(201).json({ message: "Successfully registered client." });
+  } catch (error) {
+    res.status(500).json({ error: "Error registering client." });
+  }
 };
+
+module.exports = clientRegister;
