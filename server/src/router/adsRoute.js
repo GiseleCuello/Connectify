@@ -10,9 +10,9 @@ adsRoute.post('/', createAd); // Guarda los avisos desde la base de datos
 
 adsRoute.get('/', getAllAds); // Trae los avisos desde la base de datos
 
-adsRoute.get('/:id', getAdById); // Trae los avisos desde la base de datos
-
 adsRoute.get('/filters', filtersCombined); // Muestra los filtros aplicados
+
+adsRoute.get('/:id', getAdById); // Trae los avisos desde la base de datos
 
 adsRoute.patch('/:id', updateAdById); // Actualizar los avisos desde la base de datos
 

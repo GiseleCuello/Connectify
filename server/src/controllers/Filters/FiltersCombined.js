@@ -18,7 +18,7 @@ const filtersCombined = async (req, res) => {
 
     // Verifica si se ha especificado una profesión para filtrar
     if (req.query.profession) {
-      query = query.where({ requiredSkills: req.query.profession });
+      query = query.where({ profession: req.query.profession });
     }
 
     const ads = await query.exec();

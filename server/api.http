@@ -62,13 +62,14 @@ POST http://localhost:3001/ads
 Content-Type: application/json
 
 {
-  "title": "Primer aviso",
-  "description": "Este es mi primer aviso",
-  "location": "Moron",
+  "title": "ColombiaADS",
+  "description": "ColombiaAds",
+  "location": "Colombia",
   "creator": "652d7b410f94fb5af03aa892",
-  "categories": ["Plomero"],
+  "categories": ["Programador"],
   "contractType": "Full-time",
-  "workLocation": "Presencial"
+  "workLocation": "Presencial",
+  "profession": "Programador"
 }
 
 ### Traer Ads
@@ -92,3 +93,8 @@ Content-Type: application/json
 {
   "isDeleted": true
 }
+
+### Filtros
+
+GET http://localhost:3001/ads/filters?profession=Programador
+Content-Type: application/json
