@@ -1,5 +1,4 @@
 const Professional = require("../../models/Professional");
-const Client = require("../../models/Client");
 
 const professionalSearch = async (req, res) => {
   const { profession } = req.params;
