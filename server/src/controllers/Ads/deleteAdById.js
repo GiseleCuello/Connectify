@@ -1,4 +1,5 @@
-const NewAd = require("../../models/NewAd");
+const NewAd = require('../../models/NewAd');
+
 const deleteAdById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -6,11 +7,11 @@ const deleteAdById = async (req, res) => {
       new: true,
     });
     if (!deleteAd) {
-      res.status(404).json({ error: "Not found Ad." });
+      res.status(404).json({ error: 'Not found Ad.' });
     }
-    res.status(204).send("Aviso Borrado");
+    res.status(204).send('Aviso Borrado');
   } catch (error) {
-    res.status(500).json({ error: "Error deleting ad." });
+    res.status(500).json({ error: 'Error deleting ad.' });
   }
 };
 
