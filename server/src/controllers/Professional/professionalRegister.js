@@ -1,6 +1,6 @@
 const Professional = require('../../models/Professional');
 const Client = require('../../models/Client');
-import { uploadImage } from '../Utils/Upload.js';
+const uploadImage = require('../Utils/Upload.js');
 
 const professionalRegister = async (req, res) => {
   try {
@@ -19,7 +19,7 @@ const professionalRegister = async (req, res) => {
     } = req.body;
 
     // Obtén la imagen del avatar del cuerpo de la solicitud
-    const image = req.file.image;
+    const image = req.files.image;
 
     // Restringe la carga solo a profesionales con una imagen
     if (!image) {
@@ -67,7 +67,8 @@ const professionalRegister = async (req, res) => {
 
     res.status(201).json({ message: 'Profesional registrado exitosamente' });
   } catch (error) {
-    res.status(500).json({ error: 'Error del servido', error });
+    console.error('Error en la función professionalRegister:', error);
+    res.status(500).json({ error: 'Error del servidor' });
   }
 };
 

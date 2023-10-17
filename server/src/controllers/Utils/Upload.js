@@ -1,23 +1,32 @@
-import {ref, getDownloadURL, uploadBytesResumable} from 'firebase/storage';
-import {storage} from './Firebase.js';
-import sharp from sharp;
+const {
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} = require('firebase/storage');
+const { storage } = require('./Firebase');
 
-export async function uploadImage(file) {
-  let fileBuffer = await sharp(file.buffer)
-  .resize({with: 300, height: 300, fit: "cover"})
-  .toBuffer();
+const uploadImage = async (file) => {
+  try {
+    const fileRef = ref(storage, `files/${file.originalname} ${Date.now()}`);
+    const fileMetaData = {
+      contentType: file.mimetype,
+    };
 
-  const fileRef = ref(storage, `files/${file.originalname} ${Date.now()}`);
-  
-  const fileMetaData = {
-    contentType: file.mimetype
+    const filePromise = uploadBytesResumable(
+      fileRef,
+      file.buffer, // No se necesita procesamiento con sharp
+      fileMetaData
+    );
+
+    await filePromise;
+
+    const fileDownloadUrl = await getDownloadURL(fileRef);
+
+    return { ref: fileRef, downloadURL: fileDownloadUrl };
+  } catch (error) {
+    console.error('Error en la función uploadImage:', error);
+    throw error;
   }
+};
 
-  const fileUploadPromise = uploadBytesResumable(fileRef, fileBuffer, fileMetaData);
-
-  await fileUploadPromise();
-
-  const fileDownloadUrl = await getDownloadURL(fileRef);
-
-  return {ref: fileRef, downloadURL: fileDownloadUrl}
-}
+module.exports = uploadImage;
