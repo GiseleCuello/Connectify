@@ -1,6 +1,6 @@
 const Professional = require("../../models/Professional");
 
-const professionalDelete = async (req, res) => {
+const getProfessionalUpdate = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -20,4 +20,4 @@ const professionalDelete = async (req, res) => {
   }
 };
 
-module.exports = professionalDelete;
+module.exports = getProfessionalUpdate;

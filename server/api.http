@@ -35,6 +35,9 @@ Content-Type: application/json
 ### Traer por profesiones
 GET http://localhost:3001/professional/search/Electrisita
 
+### Traer por ID
+GET http://localhost:3001/professional/652d3b907cd34e86050911a3
+
 ### Actualizar un profesional
 PATCH http://localhost:3001/professional/652d3b907cd34e86050911a3
 Content-Type: application/json
