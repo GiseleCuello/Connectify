@@ -1,6 +1,5 @@
 const Professional = require("../../models/Professional");
 const Client = require("../../models/Client");
-const bcrypt = require("bcryptjs");
 
 const professionalRegister = async (req, res) => {
   try {

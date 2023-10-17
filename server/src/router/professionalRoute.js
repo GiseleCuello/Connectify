@@ -1,9 +1,10 @@
 const professionalRoute = require("express").Router();
 const professionalRegister = require("../controllers/Professional/professionalRegister");
-const getProfessionalById = require("../controllers/Professional/getProfessionalById");
+const getProfessionalUpdate = require("../controllers/Professional/getProfessionalUpdate");
 const professionalDelete = require("../controllers/Professional/ProfessionalDelete");
 const professionalLogin = require("../controllers/Professional/professionalLogin");
 const professionalSearch = require("../controllers/Professional/professionalSearch");
+const getProfessionalById = require("../controllers/Professional/getProfessionalById");
 
 professionalRoute.post("/register", professionalRegister); // Guarda los profesionales desde la base de datos
 
@@ -11,7 +12,9 @@ professionalRoute.get("/login", professionalLogin); // Trae los profesionales de
 
 professionalRoute.get("/search/:profession", professionalSearch); // Trae los profesionales desde la base de datos
 
-professionalRoute.patch("/:id", getProfessionalById); // Actualiza los profesionales desde la base de datos
+professionalRoute.get("/:id", getProfessionalById); // Trae los profesionales desde la base de datos
+
+professionalRoute.patch("/:id", getProfessionalUpdate); // Actualiza los profesionales desde la base de datos
 
 professionalRoute.patch("/:id/delete", professionalDelete); // Borrado logico de los profesionales desde la base de datos
 
