@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const newAdSchema = new mongoose.Schema({
   title: {
@@ -28,22 +28,26 @@ const newAdSchema = new mongoose.Schema({
   creator: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Professional",
+      ref: 'Professional',
       required: true,
     },
   ],
   categories: {
     type: [String],
-    required: true
+    required: true,
   },
   contractType: {
     type: String,
-    enum: ["Full-time", "Part-time", "Freelance", "Other"],
+    enum: ['Full-time', 'Part-time', 'Freelance', 'Other'],
     required: true,
   },
   workLocation: {
     type: String,
-    enum: ["Presencial", "Remoto"],
+    enum: ['Presencial', 'Remoto'],
+    required: true,
+  },
+  profession: {
+    type: String,
     required: true,
   },
   isDeleted: {
@@ -53,4 +57,4 @@ const newAdSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("NewAd", newAdSchema);
+module.exports = mongoose.model('NewAd', newAdSchema);
