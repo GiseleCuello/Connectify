@@ -58,11 +58,7 @@ const professionalRegister = async (req, res) => {
       price,
       remoteWork,
     });
-
-    if (!newProfessional) {
-      return res.status(400).json({ message: 'No se pudo registrar' });
-    }
-
+    
     await newProfessional.save();
 
     res.status(201).json({ message: 'Profesional registrado exitosamente' });
