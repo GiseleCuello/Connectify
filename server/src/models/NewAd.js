@@ -34,7 +34,7 @@ const newAdSchema = new mongoose.Schema({
   ],
   categories: {
     type: [String],
-    required: true,
+    required: true
   },
   contractType: {
     type: String,
@@ -47,7 +47,7 @@ const newAdSchema = new mongoose.Schema({
     required: true,
   },
   isDeleted: {
-    // Inicialmente, no se ha borrado lógicamentenpm install bcrypt
+    // Inicialmente, no se ha borrado lógicamente npm install bcrypt
     type: Boolean,
     default: false,
   },
