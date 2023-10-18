@@ -35,6 +35,9 @@ Content-Type: application/json
 ### Traer por profesiones
 GET http://localhost:3001/professional/search/Electrisita
 
+### Traer por ID
+GET http://localhost:3001/professional/652d3b907cd34e86050911a3
+
 ### Actualizar un profesional
 PATCH http://localhost:3001/professional/652d3b907cd34e86050911a3
 Content-Type: application/json
@@ -59,13 +62,14 @@ POST http://localhost:3001/ads
 Content-Type: application/json
 
 {
-  "title": "Primer aviso",
-  "description": "Este es mi primer aviso",
-  "location": "Moron",
+  "title": "ColombiaADS",
+  "description": "ColombiaAds",
+  "location": "Colombia",
   "creator": "652d7b410f94fb5af03aa892",
-  "categories": ["Plomero"],
+  "categories": ["Programador"],
   "contractType": "Full-time",
-  "workLocation": "Presencial"
+  "workLocation": "Presencial",
+  "profession": "Programador"
 }
 
 ### Traer Ads
@@ -89,3 +93,8 @@ Content-Type: application/json
 {
   "isDeleted": true
 }
+
+### Filtros
+
+GET http://localhost:3001/ads/filters?profession=Programador&location=Colombia
+Content-Type: application/json

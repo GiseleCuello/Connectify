@@ -1,5 +1,4 @@
 const Professional = require("../../models/Professional");
-
 const bcrypt = require("bcryptjs");
 
 const professionalLogin = async (req, res) => {

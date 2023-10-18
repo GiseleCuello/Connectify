@@ -1,6 +1,6 @@
-const Professional = require("../../models/Professional");
-const Client = require("../../models/Client");
-const bcrypt = require("bcryptjs");
+const Professional = require('../../models/Professional');
+const Client = require('../../models/Client');
+const uploadImage = require('../Utils/Cloudinary');
 
 const professionalRegister = async (req, res) => {
   try {
@@ -9,8 +9,8 @@ const professionalRegister = async (req, res) => {
       lastName,
       username,
       email,
-      image,
-      address,
+      province,
+      location,
       password,
       profession,
       description,
@@ -18,6 +18,8 @@ const professionalRegister = async (req, res) => {
       price,
       remoteWork,
     } = req.body;
+
+    const result = await uploadImage(req.files.image.tempFilePath);
 
     // Busca si hay un Usuario ya registrado con ese nombre
     const professionalFound = await Professional.findOne({
@@ -29,7 +31,7 @@ const professionalRegister = async (req, res) => {
     });
 
     if (professionalFound || clientFound) {
-      return res.status(400).json({ message: "Usuario ya registrado" });
+      return res.status(400).json({ message: 'Usuario ya registrado' });
     }
 
     const newProfessional = new Professional({
@@ -37,9 +39,10 @@ const professionalRegister = async (req, res) => {
       lastName,
       username,
       email,
-      image,
+      image: result.secure_url,
       password,
-      address,
+      province,
+      location,
       profession,
       description,
       workingRange,
@@ -49,9 +52,10 @@ const professionalRegister = async (req, res) => {
 
     await newProfessional.save();
 
-    res.status(201).json({ message: "Profesional registrado exitosamente" });
+    res.status(201).json({ message: 'Profesional registrado exitosamente' });
   } catch (error) {
-    res.status(500).json({ error: "Error del servido", error });
+    console.error('Error en la función professionalRegister:', error);
+    res.status(500).json({ error: 'Error del servidor' });
   }
 };
 

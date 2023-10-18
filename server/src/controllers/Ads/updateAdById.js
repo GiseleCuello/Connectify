@@ -1,4 +1,4 @@
-const NewAd = require("../../models/NewAd");
+const NewAd = require('../../models/NewAd');
 
 const updateAdById = async (req, res) => {
   const { id } = req.params;
@@ -8,11 +8,11 @@ const updateAdById = async (req, res) => {
       new: true,
     });
     if (!updateAd) {
-      return res.status(404).json({ error: "Ad not found." });
+      return res.status(404).json({ error: 'Ad not found.' });
     }
     res.status(200).json(updateAd);
   } catch (error) {
-    res.status(500).json({ errorMessage: "Error del servidor", error });
+    res.status(500).json({ errorMessage: 'Error del servidor', error });
   }
 };
 
