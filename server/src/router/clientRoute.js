@@ -1,12 +1,17 @@
 const clientRoute = require("express").Router();
 
-clientRoute.post("/register"); // Guarda los clientes desde la base de datos
+const clientRegister = require("../controllers/Client/clientRegister");
+const clientLogin = require("../controllers/Client/clientLogin");
+const clientUpdate = require("../controllers/Client/clientUpdate");
+const clientDelete = require("../controllers/Client/clientDelete");
 
-clientRoute.get("/login"); // Trae los clientes desde la base de datos
+clientRoute.post("/register", clientRegister); // Guarda los clientes desde la base de datos
 
-clientRoute.patch("/:id"); // Actualiza los clientes desde la base de datos
+clientRoute.get("/login", clientLogin); // Trae los clientes desde la base de datos
 
-clientRoute.patch("/:id/delete"); // Borrado logico de los clientes desde la base de datos
+clientRoute.patch("/:id", clientUpdate); // Actualiza los clientes desde la base de datos
+
+clientRoute.patch("/:id/delete", clientDelete); // Borrado logico de los clientes desde la base de datos
 
 module.exports = clientRoute;
 

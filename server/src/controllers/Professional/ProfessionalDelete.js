@@ -11,7 +11,7 @@ const professionalDelete = async (req, res) => {
     );
 
     if (!professionalUpdate) {
-      return res.status(400).json({ message: "No se ha podido actualizar" });
+      return res.status(400).json({ message: "No se encontró al usuario" });
     }
 
     res.status(200).json(professionalUpdate);

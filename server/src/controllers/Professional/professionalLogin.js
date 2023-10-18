@@ -5,9 +5,7 @@ const professionalLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const professionalFound = await Professional.findOne({ email });
-
-    console.log(professionalFound);
+    const professionalFound = await Professional.findOne({ email:email });
 
     if (!professionalFound) {
       return res.status(404).json({ message: "Usuario no encontrado" });
@@ -24,7 +22,7 @@ const professionalLogin = async (req, res) => {
 
     res.status(200).json(professionalFound);
   } catch (error) {
-    res.status(500).json({ error: "Error del servido", error });
+    res.status(500).json({ error: "Error professionalLogin...", error });
   }
 };
 

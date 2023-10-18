@@ -35,7 +35,7 @@ const clientSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  adress: {
+  address: {
     province: {
       type: String,
       required: true,
@@ -65,7 +65,7 @@ const clientSchema = new mongoose.Schema({
 });
 
 // Middleware para hashear la contraseña antes de guardar
-clientSchema.pre("save", function (next) {
+clientSchema.pre("save", async function (next) {
   const client = this;
 
   // Solo hashear la contraseña si es nueva o ha sido modificada
@@ -73,20 +73,15 @@ clientSchema.pre("save", function (next) {
     return next();
   }
 
-  // Cadena aleatoria que se agrega a la contraseña antes de aplicar la función de hash
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      return next(err);
-    }
+  try {
+    client.password = await bcrypt.hash(client.password, 10);
+    next();
+  } catch (error) {
+    return next("Error CLient.js...", error);
+  }
 
-    bcrypt.hash(client.password, salt, (err, hash) => {
-      if (err) {
-        return next(err);
-      }
-      client.password = hash;
-      next();
-    });
-  });
+
+
 });
 
 clientSchema.plugin(pasportLocalMongoose);
