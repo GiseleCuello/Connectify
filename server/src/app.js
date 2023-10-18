@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(
   fileUpload({
-    useTempFiles: false,
+    useTempFiles: true,
     tempFileDir: './uploads',
   })
 );
