@@ -1,7 +1,15 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
+const pasportLocalMongoose = require("passport-local-mongoose");
+const findOrCreate = require("mongoose-findorcreate");
 
 const clientSchema = new mongoose.Schema({
+  googleId: {
+    type: String,
+  },
+  secret: {
+    type: String,
+  },
   name: {
     type: String,
     required: true,
@@ -75,5 +83,9 @@ clientSchema.pre("save", async function (next) {
 
 
 });
+
+clientSchema.plugin(pasportLocalMongoose);
+
+clientSchema.plugin(findOrCreate);
 
 module.exports = mongoose.model("Client", clientSchema);

@@ -5,16 +5,17 @@ const clientRegister = async (req, res) => {
   try {
     const { name, lastName, userName, email, image, address, password } = req.body;
 
+
     //Busco usuario ya registrado con ese nombre...
     const checkProf = await Professional.findOne({
-      $or: [{email:email}, {username:userName}],
+      $or: [{ email: email }, { username: userName }],
     });
     const checkClient = await Client.findOne({
-      $or: [{email:email}, {username:userName}],
+      $or: [{ email: email }, { username: userName }],
     });
 
     if (checkProf || checkClient) {
-      return res.status(400).json({message: "Usuario ya registrado"})
+      return res.status(400).json({ message: "Usuario ya registrado" });
     }
 
     // Creo una nueva instancia de Cliente...
