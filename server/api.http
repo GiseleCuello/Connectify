@@ -96,5 +96,5 @@ Content-Type: application/json
 
 ### Filtros
 
-GET http://localhost:3001/ads/filters?profession=Programador
+GET http://localhost:3001/ads/filters?profession=Programador&location=Colombia
 Content-Type: application/json

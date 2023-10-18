@@ -1,6 +1,6 @@
 const Professional = require('../../models/Professional');
 const Client = require('../../models/Client');
-const uploadImage = require('../Utils/Upload.js');
+const uploadImage = require('../Utils/Cloudinary');
 
 const professionalRegister = async (req, res) => {
   try {
@@ -18,18 +18,7 @@ const professionalRegister = async (req, res) => {
       remoteWork,
     } = req.body;
 
-    // Obtén la imagen del avatar del cuerpo de la solicitud
-    const image = req.files.image;
-
-    // Restringe la carga solo a profesionales con una imagen
-    if (!image) {
-      return res
-        .status(400)
-        .json({ message: 'La imagen del avatar es obligatoria' });
-    }
-
-    // Procesa y carga la imagen utilizando la función uploadImage
-    const { downloadURL } = await uploadImage(image[0]);
+    const result = await uploadImage(req.files.image.tempFilePath);
 
     // Busca si hay un Usuario ya registrado con ese nombre
     const professionalFound = await Professional.findOne({
@@ -49,7 +38,7 @@ const professionalRegister = async (req, res) => {
       lastName,
       username,
       email,
-      image: downloadURL,
+      image: result.secure_url,
       password,
       address,
       profession,
@@ -58,7 +47,7 @@ const professionalRegister = async (req, res) => {
       price,
       remoteWork,
     });
-    
+
     await newProfessional.save();
 
     res.status(201).json({ message: 'Profesional registrado exitosamente' });
