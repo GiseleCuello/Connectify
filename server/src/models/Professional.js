@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const professionalSchema = new mongoose.Schema({
   name: {
@@ -39,11 +39,11 @@ const professionalSchema = new mongoose.Schema({
   },
   address: {
     province: {
-      type: String,
+      type: [String],
       required: true,
     },
     location: {
-      type: String,
+      type: [String],
       required: true,
     },
   },
@@ -70,32 +70,32 @@ const professionalSchema = new mongoose.Schema({
   },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Professional", // Referencia al usuario creador
+    ref: 'Professional', // Referencia al usuario creador
   },
   clientComments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
+      ref: 'Comment',
     },
   ],
   createdAds: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "NewAd",
+      ref: 'NewAd',
     },
   ],
   payments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Payment",
+      ref: 'Payment',
     },
   ],
 });
 
-professionalSchema.pre("save", function (next) {
+professionalSchema.pre('save', function (next) {
   const professional = this;
 
-  if (!professional.isModified("password")) {
+  if (!professional.isModified('password')) {
     return next();
   }
 
@@ -114,4 +114,4 @@ professionalSchema.pre("save", function (next) {
   });
 });
 
-module.exports = mongoose.model("Professional", professionalSchema);
+module.exports = mongoose.model('Professional', professionalSchema);

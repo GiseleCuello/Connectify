@@ -5,10 +5,9 @@ const professionalDelete = require('../controllers/Professional/ProfessionalDele
 const professionalLogin = require('../controllers/Professional/professionalLogin');
 const professionalSearch = require('../controllers/Professional/professionalSearch');
 const getProfessionalById = require('../controllers/Professional/getProfessionalById');
-const upload = require('../controllers/Utils/Multer');
 
 // prettier-ignore
-professionalRoute.post('/register', upload.fields([{name: "image", maxCount: 1}]), professionalRegister); // Guarda los profesionales desde la base de datos
+professionalRoute.post('/register', professionalRegister); // Guarda los profesionales desde la base de datos
 
 professionalRoute.get('/login', professionalLogin); // Trae los profesionales desde la base de datos
 
