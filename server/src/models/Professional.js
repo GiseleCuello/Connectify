@@ -37,16 +37,16 @@ const professionalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
-    province: {
-      type: [String],
-      required: true,
-    },
-    location: {
-      type: [String],
-      required: true,
-    },
+
+  province: {
+    type: [String],
+    required: true,
   },
+  location: {
+    type: [String],
+    required: true,
+  },
+
   workingRange: {
     provinceJob: {
       type: [String],
