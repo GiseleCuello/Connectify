@@ -1,12 +1,47 @@
 const mongoose = require("mongoose");
-console.log("PROBANDO ANDO...!!")
-const AdminSchema = mongoose.Schema({
-    username: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false },
+
+const bcrypt = require("bcryptjs");
+
+const adminSchema = mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+
 });
 
-const Admin = mongoose.model("Admin", AdminSchema);
+adminSchema.pre("save", function (next) {
+  const admin = this;
 
-module.exports = Admin;
+  if (!admin.isModified("password")) {
+    return next();
+  }
+
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) {
+      return next(err);
+    }
+
+    bcrypt.hash(admin.password, salt, (err, hash) => {
+      if (err) {
+        return next(err);
+      }
+      admin.password = hash;
+      next();npm
+    });
+  });
+});
+
+module.exports = mongoose.model("Admin", adminSchema);
