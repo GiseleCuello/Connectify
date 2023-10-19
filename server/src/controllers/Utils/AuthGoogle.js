@@ -1,6 +1,7 @@
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const Client = require("../../models/Client"); // Asegúrate de importar tu modelo de cliente aquí
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const Client = require('../../models/Client'); // Asegúrate de importar tu modelo de cliente aquí
+require('dotenv').config();
 const clientId = process.env.CLIENT_ID;
 const clientSec = process.env.CLIENT_SECRET;
 
@@ -9,7 +10,7 @@ passport.use(
     {
       clientID: clientId,
       clientSecret: clientSec,
-      callbackURL: "http://localhost:5173/auth/google/home", // La URL de redirección después de la autenticación
+      callbackURL: 'http://localhost:5173/auth/google/home', // La URL de redirección después de la autenticación
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
