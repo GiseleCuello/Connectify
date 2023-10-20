@@ -16,7 +16,7 @@ const getProfessionalUpdate = async (req, res) => {
 
     res.status(200).json(professionalUpdate);
   } catch (error) {
-    res.status(500).json({ error: "Error del servido", error });
+    res.status(500).json({ error: "Error del servidor", error });
   }
 };
 
