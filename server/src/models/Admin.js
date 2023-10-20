@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const bcrypt = require("bcryptjs");
 
 const adminSchema = mongoose.Schema({
@@ -18,6 +19,7 @@ const adminSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+
 });
 
 adminSchema.pre("save", function (next) {
