@@ -24,13 +24,8 @@ Content-Type: application/json
 }
 
 ### Traer un Profesional
-GET http://localhost:3001/professional/login
-Content-Type: application/json
+GET http://localhost:3001/professional/login/?email=martinjiro21@gmail.com&password=PlomerosUnidos
 
-{
-  "email": "martinjiro21@gmail.com",
-  "password": "PlomerosUnidos"
-}
 
 ### Traer por profesiones
 GET http://localhost:3001/professional/search/Electrisita

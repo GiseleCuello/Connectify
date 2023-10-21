@@ -5,8 +5,7 @@ const professionalRoute = require("./professionalRoute");
 const commentsRoute = require("./commentsRouter");
 const adsRoute = require("./adsRoute");
 const authGoogle = require("./authGoogleRoute");
-const mercadoPago = require("../controllers/Utils/MercadoPago");
-
+// const mercadoPago = require("../controllers/Utils/MercadoPago");
 
 router.use("/client", clientRoute);
 
@@ -20,9 +19,6 @@ router.use("/comments", commentsRoute);
 
 router.use("/ads", adsRoute);
 
-router.post("/create_preference", mercadoPago);
-
-
-
+// router.post("/create_preference", mercadoPago);
 
 module.exports = router;
