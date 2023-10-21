@@ -68,34 +68,43 @@ const professionalSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  socketId: {
+    type: String, // Almacena el socket.id del profesional
+  },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Professional', // Referencia al usuario creador
+    ref: "Professional", // Referencia al usuario creador
   },
   clientComments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Comment',
+      ref: "Comment",
     },
   ],
   createdAds: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'NewAd',
+      ref: "NewAd",
     },
   ],
   payments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Payment',
+      ref: "Payment",
+    },
+  ],
+  purchase: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "purchase",
     },
   ],
 });
 
-professionalSchema.pre('save', function (next) {
+professionalSchema.pre("save", function (next) {
   const professional = this;
 
-  if (!professional.isModified('password')) {
+  if (!professional.isModified("password")) {
     return next();
   }
 
@@ -114,4 +123,4 @@ professionalSchema.pre('save', function (next) {
   });
 });
 
-module.exports = mongoose.model('Professional', professionalSchema);
+module.exports = mongoose.model("Professional", professionalSchema);

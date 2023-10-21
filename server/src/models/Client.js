@@ -62,6 +62,12 @@ const clientSchema = new mongoose.Schema({
       ref: "Payment",
     },
   ],
+  purchase: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "purchase",
+    },
+  ],
 });
 
 // Middleware para hashear la contraseña antes de guardar
@@ -79,9 +85,6 @@ clientSchema.pre("save", async function (next) {
   } catch (error) {
     return next("Error CLient.js...", error);
   }
-
-
-
 });
 
 clientSchema.plugin(pasportLocalMongoose);
