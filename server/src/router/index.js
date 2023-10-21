@@ -8,6 +8,7 @@ const authGoogle = require("./authGoogleRoute");
 const mercadoPago = require("../controllers/Utils/MercadoPago");
 const postSocket = require("../controllers/Socket/Socketio");
 
+
 router.use("/client", clientRoute);
 
 router.use("/auth/google", authGoogle);
