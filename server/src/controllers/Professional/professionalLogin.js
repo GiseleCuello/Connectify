@@ -2,10 +2,10 @@ const Professional = require("../../models/Professional");
 const bcrypt = require("bcryptjs");
 
 const professionalLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.query;
 
   try {
-    const professionalFound = await Professional.findOne({ email:email });
+    const professionalFound = await Professional.findOne({ email: email });
 
     if (!professionalFound) {
       return res.status(404).json({ message: "Usuario no encontrado" });
