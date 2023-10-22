@@ -13,9 +13,9 @@ const newAdSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rate: {
+  price: {
     type: Number,
-    default: 0,
+    default: 1000,
   },
   requiredSkills: [String],
   postingDate: {

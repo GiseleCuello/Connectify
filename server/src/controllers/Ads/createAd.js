@@ -4,7 +4,9 @@ const NewAd = require("../../models/NewAd");
 const createAd = async (req, res) => {
   try {
     const createAd = req.body;
-    const newAdData = await NewAd.create(createAd);
+    const newAdData = await NewAd.create(createAd)
+    .populate("creator") // Esto poblará los datos del profesional
+      .exec(); //ejecuta la consulta y obtiene resultados
     res.status(201).json(newAdData);
   } catch (error) {
     res.status(500).json({ error: "Error creating ad.", error });

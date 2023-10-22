@@ -3,7 +3,9 @@ const NewAd = require('../../models/NewAd');
 const getAdById = async (req, res) => {
   try {
     const { id } = req.params;
-    const ad = await NewAd.findById(id);
+    const ad = await NewAd.findById(id)
+    .populate("creator") 
+      .exec();
     if (!ad) {
       return res.status(404).json({ error: 'Ad not found.' });
     }

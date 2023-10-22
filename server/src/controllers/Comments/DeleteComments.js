@@ -7,7 +7,10 @@ const deleteComment = async (req, res) => {
       { _id: id },
       req.body,
       { new: true }
-    );
+    )
+      .populate("client") 
+      .populate("professional") 
+      .exec();
     if (!commentUpdate) {
       res.status(404).json("Not found");
     }

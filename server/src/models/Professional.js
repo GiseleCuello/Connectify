@@ -55,10 +55,6 @@ const professionalSchema = new mongoose.Schema({
       type: [String],
     },
   },
-  price: {
-    type: Number,
-    default: 1000,
-  },
   remoteWork: {
     type: Boolean,
     required: true,
