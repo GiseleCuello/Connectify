@@ -3,7 +3,10 @@ const Comment = require("../../models/Comment");
 const getById = async (req, res) => {
   try {
     const { id } = req.params;
-    const comment = await Comment.findById(id);
+    const comment = await Comment.findById(id)
+      .populate("client") 
+      .populate("professional") 
+      .exec();
 
     if (!comment) {
       return res.status(404).json({ error: "Comment not found." });
