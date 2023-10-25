@@ -1,13 +1,13 @@
-const Professional = require('../../models/Professional');
-const Client = require('../../models/Client');
-const uploadImage = require('../Utils/Cloudinary');
+const Professional = require("../../models/Professional");
+const Client = require("../../models/Client");
+const uploadImage = require("../Utils/Cloudinary");
 
 const professionalRegister = async (req, res) => {
   try {
     const {
       name,
       lastName,
-      username,
+      userName,
       email,
       province,
       location,
@@ -23,15 +23,15 @@ const professionalRegister = async (req, res) => {
 
     // Busca si hay un Usuario ya registrado con ese nombre
     const professionalFound = await Professional.findOne({
-      $or: [{ email: email }, { username: username }],
+      $or: [{ email: email }, { username: userName }],
     });
 
     const clientFound = await Client.findOne({
-      $or: [{ email: email }, { username: username }],
+      $or: [{ email: email }, { username: userName }],
     });
 
     if (professionalFound || clientFound) {
-      return res.status(400).json({ message: 'Usuario ya registrado' });
+      return res.status(400).json({ message: "Usuario ya registrado" });
     }
 
     const newProfessional = new Professional({
@@ -52,10 +52,10 @@ const professionalRegister = async (req, res) => {
 
     await newProfessional.save();
 
-    res.status(201).json({ message: 'Profesional registrado exitosamente' });
+    res.status(201).json({ message: "Profesional registrado exitosamente" });
   } catch (error) {
-    console.error('Error en la función professionalRegister:', error);
-    res.status(500).json({ error: 'Error del servidor' });
+    console.error("Error en la función professionalRegister:", error);
+    res.status(500).json({ error: "Error del servidor" });
   }
 };
 

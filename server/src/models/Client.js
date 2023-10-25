@@ -4,12 +4,6 @@ const pasportLocalMongoose = require("passport-local-mongoose");
 const findOrCreate = require("mongoose-findorcreate");
 
 const clientSchema = new mongoose.Schema({
-  googleId: {
-    type: String,
-  },
-  secret: {
-    type: String,
-  },
   name: {
     type: String,
     required: true,
