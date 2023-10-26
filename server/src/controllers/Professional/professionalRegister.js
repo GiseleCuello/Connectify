@@ -14,7 +14,8 @@ const professionalRegister = async (req, res) => {
       password,
       profession,
       description,
-      workingRange,
+      provinceJob,
+      locationJob,
       price,
       remoteWork,
     } = req.body;
@@ -45,7 +46,8 @@ const professionalRegister = async (req, res) => {
       location,
       profession,
       description,
-      workingRange,
+      provinceJob,
+      locationJob,
       price,
       remoteWork,
     });
@@ -55,7 +57,7 @@ const professionalRegister = async (req, res) => {
     res.status(201).json({ message: "Profesional registrado exitosamente" });
   } catch (error) {
     console.error("Error en la función professionalRegister:", error);
-    res.status(500).json({ error: "Error del servidor" });
+    res.status(502).json({ error: "Error del servidor" });
   }
 };
 
