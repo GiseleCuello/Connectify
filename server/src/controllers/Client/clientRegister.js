@@ -1,17 +1,19 @@
 const Client = require("../../models/Client");
 const Professional = require("../../models/Professional");
+const uploadImage = require("../Utils/Cloudinary");
 
 const clientRegister = async (req, res) => {
   try {
-    const { name, lastName, userName, email, image, address, password } = req.body;
+    const { name, lastName, userName, email, province, location, password } =
+      req.body;
 
-
+    const result = await uploadImage(req.files.image.tempFilePath);
     //Busco usuario ya registrado con ese nombre...
     const checkProf = await Professional.findOne({
-      $or: [{ email: email }, { username: userName }],
+      $or: [{ email: email }, { userName: userName }],
     });
     const checkClient = await Client.findOne({
-      $or: [{ email: email }, { username: userName }],
+      $or: [{ email: email }, { userName: userName }],
     });
 
     if (checkProf || checkClient) {
@@ -24,16 +26,17 @@ const clientRegister = async (req, res) => {
       lastName,
       userName,
       email,
-      image,
+      image: result.secure_url,
       password,
-      address,
+      province,
+      location,
     });
 
     await newClient.save();
 
     res.status(201).json({ message: "Successfully registered client." });
   } catch (error) {
-    res.status(500).json({ error: "Error registering client...!", error });
+    res.status(501).json({ error: "Error registering client...!", error });
   }
 };
 
