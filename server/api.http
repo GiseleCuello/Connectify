@@ -91,5 +91,5 @@ Content-Type: application/json
 
 ### Filtros
 
-GET http://localhost:3001/ads/filters?profession=Programador&location=Colombia
+GET http://localhost:3001/ads/filters?profession=Carpintero&location=Cordoba
 Content-Type: application/json
