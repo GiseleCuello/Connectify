@@ -7,6 +7,7 @@ const adsRoute = require("./adsRoute");
 // const authGoogle = require("./authGoogleRoute");
 const mercadoPago = require("../controllers/Utils/MercadoPago");
 const postSocket = require("../controllers/Socket/Socketio");
+const favoritesRoute = require("./favoritesRoute");
 
 router.use("/client", clientRoute);
 
@@ -19,6 +20,8 @@ router.use("/admin", adminRoute);
 router.use("/comments", commentsRoute);
 
 router.use("/ads", adsRoute);
+
+router.use("/fav", favoritesRoute);
 
 router.post("/create_preference", mercadoPago);
 
