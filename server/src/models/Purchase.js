@@ -5,6 +5,10 @@ const purchaseSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  status:{
+    type: String,
+    require: true,
+  },
   professional: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Professional",

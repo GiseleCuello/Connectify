@@ -27,4 +27,6 @@ router.post("/create_preference", mercadoPago);
 
 router.post("/purchase", postSocket);
 
+router.get("/purchase", postSocket);
+
 module.exports = router;
