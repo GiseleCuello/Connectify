@@ -14,6 +14,11 @@ const commentSchema = new mongoose.Schema({
     min: 1,
     max: 5,
   },
+  isDeleted: {
+    // Inicialmente, no se ha borrado lógicamente
+    type: Boolean,
+    default: false,
+  },
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Client',

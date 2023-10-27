@@ -8,7 +8,7 @@ const getComments = async (req, res) => {
       .exec();
     res.status(200).json(comentario);
   } catch (error) {
-    res.status(500).json({ error: "Error creating comments" });
+    res.status(500).json({ error: "Error retrieving comments" });
   }
 };
 

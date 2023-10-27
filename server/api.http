@@ -72,14 +72,14 @@ POST http://localhost:3001/ads
 Content-Type: application/json
 
 {
-  "title": "ColombiaADS",
-  "description": "ColombiaAds",
-  "location": "Colombia",
-  "creator": "652d7b410f94fb5af03aa892",
-  "categories": ["Programador"],
+  "title": "Profesora de portugues",
+  "description": "Profesora de portugues",
+  "location": "Rio Negro",
+  "creator": "6536c522fceb61c7b5762455",
+  "categories": ["Profesora"],
   "contractType": "Full-time",
   "workLocation": "Presencial",
-  "profession": "Programador"
+  "profession": "Profesora"
 }
 
 ### Traer Ads
