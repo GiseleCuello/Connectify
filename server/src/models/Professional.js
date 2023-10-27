@@ -60,7 +60,7 @@ const professionalSchema = new mongoose.Schema({
     required: true,
   },
   isDeleted: {
-    // Inicialmente, no se ha borrado lógicamentenpm install bcrypt
+    // Inicialmente, no se ha borrado lógicamente
     type: Boolean,
     default: false,
   },
