@@ -36,7 +36,6 @@ const clientGoogleLogin = async (req, res) => {
         res.status(200).json({ message: "Inicio de sesión exitoso." });
       }
     } catch (error) {
-      console.log("Error:", error);
       res.status(500).json({ error: "Error en la autenticación de Google.", error });
     }
   };
