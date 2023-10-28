@@ -130,3 +130,11 @@ Content-Type: application/json
 
 ### Traer todos los Favoritos
 GET http://localhost:3001/fav
+
+### -Guardar clientes Google
+POST http://localhost:3001/client/googlelogin
+Content-Type: application/json
+
+{
+  "email": "andres@gmail.com"
+}
