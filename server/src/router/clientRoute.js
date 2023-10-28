@@ -4,14 +4,17 @@ const clientRegister = require("../controllers/Client/clientRegister");
 const clientLogin = require("../controllers/Client/clientLogin");
 const clientUpdate = require("../controllers/Client/clientUpdate");
 const clientDelete = require("../controllers/Client/clientDelete");
+const getAllClients = require("../controllers/Client/getAllClients");
 
 clientRoute.post("/register", clientRegister); // Guarda los clientes desde la base de datos
 
 clientRoute.get("/login", clientLogin); // Trae los clientes desde la base de datos
 
+clientRoute.get("/", getAllClients); // Trae todes les clientes desde la base de datos
+
 clientRoute.patch("/:id", clientUpdate); // Actualiza los clientes desde la base de datos
 
-clientRoute.patch("/:id/delete", clientDelete); // Borrado logico de los clientes desde la base de datos
+clientRoute.patch("/:id/delete", clientDelete); // Borrado logico de los clientes desde la base de datos(y restitución)
 
 module.exports = clientRoute;
 

@@ -4,17 +4,14 @@ const professionalDelete = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Find the professional document by its ID
     const existingProfessional = await Professional.findById(id);
 
     if (!existingProfessional) {
-      return res.status(400).json({ message: "No se encontró al usuario" });
+      return res.status(400).json({ message: "No se encontró al profesional" });
     }
 
-    // Toggle the value of 'isDeleted'
     const isDeleted = !existingProfessional.isDeleted;
 
-    // Use $set to update the 'isDeleted' field
     const professionalUpdate = await Professional.findByIdAndUpdate(
       { _id: id },
       { $set: { isDeleted } },
