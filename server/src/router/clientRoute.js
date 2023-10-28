@@ -5,6 +5,7 @@ const clientLogin = require("../controllers/Client/clientLogin");
 const clientUpdate = require("../controllers/Client/clientUpdate");
 const clientDelete = require("../controllers/Client/clientDelete");
 const getAllClients = require("../controllers/Client/getAllClients");
+const clientGoogleLogin = require("../controllers/Client/loginGoogleRegister");
 
 clientRoute.post("/register", clientRegister); // Guarda los clientes desde la base de datos
 
@@ -15,6 +16,8 @@ clientRoute.get("/", getAllClients); // Trae todes les clientes desde la base de
 clientRoute.patch("/:id", clientUpdate); // Actualiza los clientes desde la base de datos
 
 clientRoute.patch("/:id/delete", clientDelete); // Borrado logico de los clientes desde la base de datos(y restitución)
+
+clientRoute.post("/googlelogin", clientGoogleLogin); // Guarda clientes logueados con Google
 
 module.exports = clientRoute;
 

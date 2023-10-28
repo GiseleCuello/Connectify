@@ -13,7 +13,7 @@ const getById = async (req, res) => {
     }
     res.status(200).json(ad);
   } catch (error) {
-    res.status(500).json({ error: "Error getting ad." });
+    res.status(500).json({ error: "Error getting comment." });
   }
 };
 
