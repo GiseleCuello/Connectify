@@ -13,7 +13,7 @@ const filtersCombined = async (req, res) => {
     if (req.query.minPrice && req.query.maxPrice) {
       query = query.where({
         price: {
-          $gte: req.query.minPrice,
+          $gte: req.query.minPrice, // Convierte a número
           $lte: req.query.maxPrice, // Convierte a número
         },
       });
