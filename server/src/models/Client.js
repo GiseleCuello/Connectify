@@ -4,6 +4,13 @@ const pasportLocalMongoose = require("passport-local-mongoose");
 const findOrCreate = require("mongoose-findorcreate");
 
 const clientSchema = new mongoose.Schema({
+  googleId: {
+    type: String,
+  },
+  isGoogleUser: {
+    type: Boolean,
+    default: false,
+  },
   name: {
     type: String,
     required: true,
@@ -29,16 +36,16 @@ const clientSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-
-  province: {
-    type: String,
-    required: true,
+  address: {
+    province: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
   },
-  location: {
-    type: String,
-    required: true,
-  },
-
   isDeleted: {
     // Inicialmente, no se ha borrado lógicamente
     type: Boolean,
@@ -86,3 +93,5 @@ clientSchema.plugin(pasportLocalMongoose);
 clientSchema.plugin(findOrCreate);
 
 module.exports = mongoose.model("Client", clientSchema);
+
+
