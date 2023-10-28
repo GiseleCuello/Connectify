@@ -1,4 +1,4 @@
-const NewAd = require("../../models/NewAd");
+const NewAd = require('../../models/NewAd');
 
 const filtersCombined = async (req, res) => {
   try {
@@ -10,10 +10,13 @@ const filtersCombined = async (req, res) => {
     }
 
     // Verifica si se especifica la ordenación por precio
-    if (req.query.sort === "price-asc") {
-      query = query.sort({ rate: 1 });
-    } else if (req.query.sort === "price-desc") {
-      query = query.sort({ rate: -1 });
+    if (req.query.minPrice && req.query.maxPrice) {
+      query = query.where({
+        price: {
+          $gte: req.query.minPrice,
+          $lte: req.query.maxPrice, // Convierte a número
+        },
+      });
     }
 
     // Verifica si se ha especificado una profesión para filtrar
@@ -22,11 +25,11 @@ const filtersCombined = async (req, res) => {
     }
 
     const ads = await query
-      .populate("creator") // Esto poblará los datos del profesional
+      .populate('creator') // Esto poblará los datos del profesional
       .exec(); //ejecuta la consulta y obtiene resultados
     res.json(ads);
   } catch (err) {
-    res.status(500).json({ error: "Error al obtener los anuncios" });
+    res.status(500).json({ error: 'Error al obtener los anuncios' });
   }
 };
 
