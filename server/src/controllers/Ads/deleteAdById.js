@@ -13,8 +13,7 @@ const deleteAdById = async (req, res) => {
 
     const adUpdate = await NewAd.findByIdAndUpdate(
       { _id: id },
-      { $set: { isDeleted } },
-      { new: true }
+      { $set: { isDeleted } }
     );
 
     res.status(200).json(adUpdate);
