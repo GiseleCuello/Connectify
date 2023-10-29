@@ -1,5 +1,4 @@
 const Professional = require("../../models/Professional");
-const Client = require("../../models/Client");
 const uploadImage = require("../Utils/Cloudinary");
 
 const professionalRegister = async (req, res) => {

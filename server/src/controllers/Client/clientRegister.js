@@ -1,13 +1,17 @@
 const uploadImage = require("../Utils/Cloudinary");
 const Client = require("../../models/Client");
-const Professional = require("../../models/Professional");
 
 const clientRegister = async (req, res) => {
   try {
-    const { name, lastName, userName, email, image, address, password } = req.body;
+    const { name, lastName, userName, email, image, address, password } =
+      req.body;
+
+    const result = await uploadImage(req.files.image.tempFilePath);
 
     // Busca si ya existe un usuario registrado con ese correo o userName
-    const existingUser = await Client.findOne({ $or: [{ email }, { userName }] });
+    const existingUser = await Client.findOne({
+      $or: [{ email }, { userName }],
+    });
 
     if (existingUser) {
       return res.status(400).json({ message: "Usuario ya registrado" });
@@ -19,9 +23,10 @@ const clientRegister = async (req, res) => {
       lastName,
       userName,
       email,
-      image,
+      image: result.secure_url,
       password,
-      address,
+      province,
+      location,
     });
 
     await newClient.save();
