@@ -27,6 +27,7 @@ const professionalRegister = async (req, res) => {
       $or: [{ email: email }, { userName: userName }],
     });
 
+    // Aca busca si no esta registrado
     if (professionalFound) {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
