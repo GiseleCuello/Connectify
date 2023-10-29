@@ -3,7 +3,7 @@ const Client = require("../../models/Client");
 
 const clientRegister = async (req, res) => {
   try {
-    const { name, lastName, userName, email, image, address, password } =
+    const { name, lastName, userName, email, province, location, password } =
       req.body;
 
     const result = await uploadImage(req.files.image.tempFilePath);
