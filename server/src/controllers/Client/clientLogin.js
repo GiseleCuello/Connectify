@@ -8,8 +8,6 @@ const clientLogin = async (req, res) => {
   try {
     const clientSearch = await Client.findOne({ email: email });
 
-    console.log(email, password);
-
     if (!clientSearch) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
