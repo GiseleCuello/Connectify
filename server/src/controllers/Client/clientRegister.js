@@ -1,11 +1,15 @@
 const Client = require("../../models/Client");
+<<<<<<< HEAD
 const Professional = require("../../models/Professional");
 const uploadImage = require("../Utils/Cloudinary");
+=======
+>>>>>>> 34fb7b7c21e202cd633c80fecf9822216660dc60
 
 const clientRegister = async (req, res) => {
   try {
     const { name, lastName, userName, email, province, location, password } =
       req.body;
+<<<<<<< HEAD
 
     const result = await uploadImage(req.files.image.tempFilePath);
     //Busco usuario ya registrado con ese nombre...
@@ -14,6 +18,14 @@ const clientRegister = async (req, res) => {
     });
     const checkClient = await Client.findOne({
       $or: [{ email: email }, { userName: userName }],
+=======
+
+    const result = await uploadImage(req.files.image.tempFilePath);
+
+    // Busca si ya existe un usuario registrado con ese correo o userName
+    const existingUser = await Client.findOne({
+      $or: [{ email }, { userName }],
+>>>>>>> 34fb7b7c21e202cd633c80fecf9822216660dc60
     });
 
     if (checkProf || checkClient) {
