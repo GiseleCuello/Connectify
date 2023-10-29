@@ -27,11 +27,7 @@ const professionalRegister = async (req, res) => {
       $or: [{ email: email }, { userName: userName }],
     });
 
-    const clientFound = await Client.findOne({
-      $or: [{ email: email }, { userName: userName }],
-    });
-
-    if (professionalFound || clientFound) {
+    if (professionalFound) {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
 
