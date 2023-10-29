@@ -1,5 +1,4 @@
 const Professional = require("../../models/Professional");
-const Client = require("../../models/Client");
 const uploadImage = require("../Utils/Cloudinary");
 
 const professionalRegister = async (req, res) => {
@@ -27,11 +26,8 @@ const professionalRegister = async (req, res) => {
       $or: [{ email: email }, { userName: userName }],
     });
 
-    const clientFound = await Client.findOne({
-      $or: [{ email: email }, { userName: userName }],
-    });
-
-    if (professionalFound || clientFound) {
+    // Aca busca si no esta registrado
+    if (professionalFound) {
       return res.status(400).json({ message: "Usuario ya registrado" });
     }
 
