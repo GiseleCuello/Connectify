@@ -1,18 +1,24 @@
-const NewAd = require('../../models/NewAd');
+const NewAd = require("../../models/NewAd");
 
 const deleteAdById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const deleteAd = await NewAd.findByIdAndUpdate({ _id: id }, req.body, {
-      new: true,
-    })
-    .populate("creator");
-    if (!deleteAd) {
-      res.status(404).json({ error: 'Not found Ad.' });
+    const existingAd = await NewAd.findById(id);
+
+    if (!existingAd) {
+      return res.status(400).json({ message: "No se encontró el anuncio" });
     }
-    res.status(204).send('Aviso Borrado');
+
+    const isDeleted = !existingAd.isDeleted;
+
+    const adUpdate = await NewAd.findByIdAndUpdate(
+      { _id: id },
+      { $set: { isDeleted } }
+    );
+
+    res.status(200).json(adUpdate);
   } catch (error) {
-    res.status(500).json({ error: 'Error deleting ad.' });
+    res.status(500).json({ error: "Error del servidor", error });
   }
 };
 

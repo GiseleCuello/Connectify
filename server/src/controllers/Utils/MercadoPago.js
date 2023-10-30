@@ -11,22 +11,28 @@ access_token: ACCESS_TOKEN,
 });
 
 const mercadoPago = (req, res) => {
-// Datos que vienen por body desde el FRONT.
-  let preference = {
-    items: [
-      {
-        title: req.body.description,
-        unit_price: Number(req.body.price),
-        quantity: Number(req.body.quantity),
-      }
-    ],
-    back_urls: {
-      "success": MERCADOPAGO_SUCCESS,
-      "failure": MERCADOPAGO_FAILURE,
-      "pending": ""
-    },
-    auto_return: "approved",
-  };
+
+    // const SUCCESS = `http://localhost:5173/payments/${req.body.idClient}`
+    const SUCCESS = `${MERCADOPAGO_SUCCESS}/payments/${req.body.idClient}`
+    const FAILURE = `${MERCADOPAGO_FAILURE}/payments/${req.body.idClient}`
+
+
+
+    let preference = {
+        items: [
+          {
+            title: req.body.description,
+            unit_price: Number(req.body.price),
+            quantity: Number(req.body.quantity),
+          }
+        ],
+        back_urls: {
+          "success": SUCCESS,     //MERCADOPAGO_SUCCESS,
+          "failure": FAILURE,     //MERCADOPAGO_FAILURE,
+          "pending": ""
+        },
+        auto_return: "approved",
+    };
 
   mercadopago.preferences
     .create(preference)
