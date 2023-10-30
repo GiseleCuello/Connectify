@@ -11,31 +11,32 @@ const postComments = async (req, res) => {
       return res.status(401).json({ error: "Unauthorized. Please log in." });
     }
 
-    // Verifica si el usuario tiene un historial de compras
-    const hasPurchases =
-      (await Purchase.find({ client: clientId }).countDocuments()) > 0;
+    // // Verifica si el usuario tiene un historial de compras
+    // const hasPurchases =
+    //   (await Purchase.find({ client: clientId }).countDocuments()) > 0;
 
-    if (!hasPurchases) {
-      return res
-        .status(400)
-        .json({ error: "You must make a purchase before leaving a review." });
-    } else {
-      const hasSuccessfulPurchase = await Purchase.findOne({
-        client: clientId,
-        status: "approved",
-      });
+    // if (!hasPurchases) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "You must make a purchase before leaving a review." });
+    // } else {
+    //   const hasSuccessfulPurchase = await Purchase.findOne({
+    //     client: clientId,
+    //     status: "approved",
+    //   });
 
-      if (!hasSuccessfulPurchase) {
-        return res
-          .status(400)
-          .json({
-            error:
-              "You must make a successful purchase before leaving a review.",
-          });
-      }
-    }
+    //   if (!hasSuccessfulPurchase) {
+    //     return res
+    //       .status(400)
+    //       .json({
+    //         error:
+    //           "You must make a successful purchase before leaving a review.",
+    //       });
+    //   }
+    // }
 
     // Verifica cuántas reseñas ha dejado el usuario para este profesional
+
     const numberOfReviews = await Comment.find({
       client: clientId,
       professional: professionalId,
@@ -47,7 +48,8 @@ const postComments = async (req, res) => {
     }
 
     // Validar los datos de entrada
-    if (!comment || !ranking || !clientId || !professionalId) {
+    // if (!comment || !ranking || !clientId || !professionalId) {
+      if (!comment  || !clientId || !professionalId){
       return res
         .status(400)
         .json({ error: "Invalid data. Please provide all required fields." });
@@ -60,15 +62,15 @@ const postComments = async (req, res) => {
       professional: professionalId,
     });
 
-    // Actualizar la calificación promedio del profesional
-    const comments = await Comment.find({ professional: professionalId });
-    const totalRanking = comments.reduce((acc, curr) => acc + curr.ranking, 0);
-    const avgRanking = totalRanking / comments.length;
+    // // Actualizar la calificación promedio del profesional
+    // const comments = await Comment.find({ professional: professionalId });
+    // const totalRanking = comments.reduce((acc, curr) => acc + curr.ranking, 0);
+    // const avgRanking = totalRanking / comments.length;
 
-    // Actualizar la calificación promedio en el perfil del profesional
-    await Professional.findByIdAndUpdate(professionalId, {
-      averageRanking: avgRanking,
-    });
+    // // Actualizar la calificación promedio en el perfil del profesional
+    // await Professional.findByIdAndUpdate(professionalId, {
+    //   averageRanking: avgRanking,
+    // });
 
     res.status(201).json(newComment);
   } catch (error) {
