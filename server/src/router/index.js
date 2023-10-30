@@ -8,6 +8,7 @@ const chatRoute = require('./chatRoute');
 const mercadoPago = require('../controllers/Utils/MercadoPago');
 const postSocket = require('../controllers/Socket/Socketio');
 const favoritesRoute = require('./favoritesRoute');
+const  payment  = require('mercadopago');
 
 
 router.use('/client', clientRoute);
@@ -32,7 +33,7 @@ router.post('/purchase', postSocket);
 router.get('/purchase', postSocket);
 
 
-router.use("/payments", payments);
+router.use("/payments", payment);
 
 
 module.exports = router;
