@@ -8,11 +8,11 @@ const paymentsRegister = async (req, res) => {
   console.log("DATOS register...", req.body);
   
   try {
-    const { clientId, professionalId, date, isCompleted } = req.body;
+    const { userName, professionalId, date, isCompleted } = req.body;
 
     // Creo una nueva instancia de Cliente...
     const payment = new Payment({
-      clientId,
+      userName,
       professionalId,
       date,
       isCompleted
