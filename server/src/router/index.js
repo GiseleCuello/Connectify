@@ -9,6 +9,7 @@ const mercadoPago = require('../controllers/Utils/MercadoPago');
 const postSocket = require('../controllers/Socket/Socketio');
 const favoritesRoute = require('./favoritesRoute');
 const  payment  = require('mercadopago');
+const paymentsRoute = require('./paymentsRoute');
 
 
 router.use('/client', clientRoute);
@@ -33,7 +34,7 @@ router.post('/purchase', postSocket);
 router.get('/purchase', postSocket);
 
 
-router.use("/payments", payment);
+router.use("/payments", paymentsRoute);
 
 
 module.exports = router;
