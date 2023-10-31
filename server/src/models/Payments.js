@@ -6,6 +6,10 @@ const paymentSchema = new mongoose.Schema({
     ref: 'Professional', // Referencia a la colección de profesionales
     required: true,
   },
+  paymentID:{
+    type: String,
+    required: true,
+  },
   userName: {
     type: String, // Campo para almacenar el userName del cliente
     required: true,
@@ -15,8 +19,8 @@ const paymentSchema = new mongoose.Schema({
     default: Date.now,
   },
   isCompleted: {
-    type: Boolean,
-    default: false,
+    type: String,
+    required: true,
   },
 });
 
