@@ -1,5 +1,6 @@
 const uploadImage = require("../Utils/Cloudinary");
 const Client = require("../../models/Client");
+const nodemailer = require("nodemailer");
 
 const clientRegister = async (req, res) => {
   try {
@@ -29,7 +30,33 @@ const clientRegister = async (req, res) => {
       location,
     });
 
+    // Configura el servicio de envío de correos electrónicos
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.MAIL,
+        pass: process.env.PASSWORDMAIL,
+      },
+    });
+
     await newClient.save();
+
+    // Envía un correo electrónico al cliente
+    const mailOptions = {
+      from: process.env.MAIL,
+      to: newClient.email,
+      subject: "Gracias por registrarte",
+      text: "Gracias por registrarte en nuestra aplicación. Ya podes comenzar a disfrutar de nuestros servicios.",
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log("Error al enviar el correo electrónico:", error);
+      } else {
+        console.log("Correo electrónico enviado:", info.response);
+      }
+    });
+
     res.status(201).json({ message: "Successfully registered client." });
   } catch (error) {
     res.status(500).json({ error: "Error registering client...!", error });
