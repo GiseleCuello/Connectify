@@ -2,7 +2,7 @@ const Professional = require("../../models/Professional");
 const bcrypt = require("bcryptjs");
 
 const professionalLogin = async (req, res) => {
-  const { email, password } = req.query;
+  const { email, password } = req.body;
 
   try {
     const professionalFound = await Professional.findOne({ email: email });

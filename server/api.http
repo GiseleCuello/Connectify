@@ -131,11 +131,22 @@ Content-Type: application/json
 ### Traer todos los Favoritos
 GET http://localhost:3001/fav
 
-### -Guardar clientes Google
-POST http://localhost:3001/client/googlelogin
+### Login clientes
+POST http://localhost:3001/client/login/
 Content-Type: application/json
 
 {
-  "email": "xtark.electronica@gmail.com"
+
+  "email": "martinjiro@gmail.com",
+  "password": "Pass123"
+}
+
+### Login Profesionales
+POST http://localhost:3001/professional/login/
+Content-Type: application/json
+
+{
+  "email": "martinjiro@gmail.com",
+  "password": "Pass123"
 }
 

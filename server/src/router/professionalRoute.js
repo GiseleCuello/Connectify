@@ -10,7 +10,7 @@ const getAllProfessionals = require("../controllers/Professional/getAllProfessio
 // prettier-ignore
 professionalRoute.post('/register', professionalRegister); // Guarda los profesionales desde la base de datos
 
-professionalRoute.get("/login", professionalLogin); // Trae los profesionales desde la base de datos
+professionalRoute.post("/login", professionalLogin); // Trae los profesionales desde la base de datos
 
 professionalRoute.get("/search/:profession", professionalSearch); // Trae los profesionales desde la base de datos
 

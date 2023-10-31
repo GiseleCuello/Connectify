@@ -9,7 +9,7 @@ const clientGoogleLogin = require("../controllers/Client/loginGoogleRegister");
 
 clientRoute.post("/register", clientRegister); // Guarda los clientes desde la base de datos
 
-clientRoute.get("/login", clientLogin); // Trae los clientes desde la base de datos
+clientRoute.post("/login", clientLogin); // Trae los clientes desde la base de datos
 
 clientRoute.get("/", getAllClients); // Trae todes les clientes desde la base de datos
 
