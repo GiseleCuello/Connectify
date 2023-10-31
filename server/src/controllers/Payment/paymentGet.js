@@ -5,7 +5,7 @@ const paymentsGet = async (req, res) => {
     const payments = await Payments.find()
     
     if (!payments || payments.length === 0) {
-        return res.status(404).json({ error: "Payment not found." });
+        return res.status(404).json({ error: "Payment GET not found." });
     }
     res.status(200).json(payments);
   } catch (error) {

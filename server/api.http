@@ -136,6 +136,7 @@ POST http://localhost:3001/client/login/
 Content-Type: application/json
 
 {
+
   "email": "martinjiro@gmail.com",
   "password": "Pass123"
 }
@@ -148,3 +149,4 @@ Content-Type: application/json
   "email": "martinjiro@gmail.com",
   "password": "Pass123"
 }
+

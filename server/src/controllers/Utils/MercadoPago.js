@@ -13,10 +13,10 @@ access_token: ACCESS_TOKEN,
 const mercadoPago = (req, res) => {
 
     // const SUCCESS = `http://localhost:5173/payments/${req.body.idClient}`
-    const SUCCESS = `${MERCADOPAGO_SUCCESS}/payments/${req.body.idClient}`
-    const FAILURE = `${MERCADOPAGO_FAILURE}/payments/${req.body.idClient}`
+    const SUCCESS = `${MERCADOPAGO_SUCCESS}/payments/${req.body.userName}`
+    const FAILURE = `${MERCADOPAGO_FAILURE}/payments/${req.body.userName}`
 
-
+// console.log("utilsMP!!!", req.body);
 
     let preference = {
         items: [
@@ -24,6 +24,7 @@ const mercadoPago = (req, res) => {
             title: req.body.description,
             unit_price: Number(req.body.price),
             quantity: Number(req.body.quantity),
+            
           }
         ],
         back_urls: {
@@ -38,7 +39,7 @@ const mercadoPago = (req, res) => {
     .create(preference)
     .then(function (response) {
       res.json({
-        id: response.body.id    //! Mando el id del pago al FRONT
+        id: response.body.id    // Mando el id del pago al FRONT
       });
     })
     .catch(function (error) {

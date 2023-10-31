@@ -1,35 +1,37 @@
-const NewAd = require('../../models/NewAd');
+const NewAd = require("../../models/NewAd");
 
 const filtersCombined = async (req, res) => {
   try {
-    let query = NewAd.find();
+    let filterConditions = {};
 
-    // Verifica si se ha especificado un filtro de ubicación en la URL
     if (req.query.location) {
-      query = query.where({ location: req.query.location });
+      filterConditions.location = req.query.location;
     }
 
-    // Verifica si se especifica la ordenación por precio
     if (req.query.minPrice && req.query.maxPrice) {
-      query = query.where({
-        price: {
-          $gte: req.query.minPrice, // Convierte a número
-          $lte: req.query.maxPrice, // Convierte a número
-        },
-      });
+      filterConditions.price = {
+        $gte: req.query.minPrice,
+        $lte: req.query.maxPrice,
+      };
     }
 
-    // Verifica si se ha especificado una profesión para filtrar
     if (req.query.profession) {
-      query = query.where({ profession: req.query.profession });
+      filterConditions.profession = req.query.profession;
     }
 
-    const ads = await query
-      .populate('creator') // Esto poblará los datos del profesional
-      .exec(); //ejecuta la consulta y obtiene resultados
+    let query = NewAd.find(filterConditions);
+
+    if (req.query.sortPrice === "asc") {
+      query = query.sort({ price: 1 });
+    } else if (req.query.sortPrice === "desc") {
+      query = query.sort({ price: -1 });
+    }
+
+    const ads = await query.populate("creator").exec();
+
     res.json(ads);
   } catch (err) {
-    res.status(500).json({ error: 'Error al obtener los anuncios' });
+    res.status(500).json({ error: "Error al obtener los anuncios" });
   }
 };
 
