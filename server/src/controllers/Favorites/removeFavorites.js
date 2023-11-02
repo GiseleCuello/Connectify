@@ -17,13 +17,9 @@ const removeFavorite = async (req, res) => {
 
     const result = await Favorites.deleteOne({ _id: existingFavorite._id });
 
-    if (result.deletedCount === 1) {
-      res
-        .status(200)
-        .json({ message: "Profesional eliminado de la lista de favoritos" });
-    } else {
-      res.status(500).json({ error: "No se pudo eliminar el favorito" });
-    }
+    const newFavorite = await Favorites.find().populate("professional").exec();
+
+    res.status(200).json(newFavorite);
   } catch (error) {
     res.status(500).json({ error: "Error del servidor" });
   }

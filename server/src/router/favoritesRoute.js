@@ -3,7 +3,7 @@ const getAllFavorites = require("../controllers/Favorites/getAllFavorites");
 const removeFavorite = require("../controllers/Favorites/removeFavorites");
 const saveFavorites = require("../controllers/Favorites/saveFavorites");
 
-favoritesRoute.get("/", getAllFavorites);
+favoritesRoute.get("/:clientId", getAllFavorites);
 
 favoritesRoute.post("/save", saveFavorites);
 
