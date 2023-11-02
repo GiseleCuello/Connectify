@@ -11,6 +11,10 @@ const favoritesSchema = new mongoose.Schema({
     ref: "Professional",
     required: true,
   },
+  isSave: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Favorites", favoritesSchema);
