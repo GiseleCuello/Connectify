@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const adminSchema = mongoose.Schema({
-  username: {
+  userName: {
     type: String,
     required: true,
   },
@@ -15,11 +15,14 @@ const adminSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  types: {
+    type: String,
+    default: "admin",
+  },
   isAdmin: {
     type: Boolean,
-    default: false,
+    default: true,
   },
-
 });
 
 adminSchema.pre("save", function (next) {
@@ -39,7 +42,7 @@ adminSchema.pre("save", function (next) {
         return next(err);
       }
       admin.password = hash;
-      next();npm
+      next();
     });
   });
 });

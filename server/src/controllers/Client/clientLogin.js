@@ -2,10 +2,10 @@ const Client = require("../../models/Client");
 const bcryptjs = require("bcryptjs");
 
 const clientLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, types } = req.body;
 
   try {
-    const clientSearch = await Client.findOne({ email: email });
+    const clientSearch = await Client.findOne({ email: email, types: types });
 
     if (!clientSearch) {
       return res.status(404).json({ message: "Usuario no encontrado" });
