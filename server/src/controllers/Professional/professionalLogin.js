@@ -1,8 +1,9 @@
 const Professional = require("../../models/Professional");
+const Admin = require("../../models/Admin");
 const bcrypt = require("bcryptjs");
 
 const professionalLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, types } = req.body;
 
   try {
     const adminSearch = await Admin.findOne({ email: email });
@@ -20,7 +21,10 @@ const professionalLogin = async (req, res) => {
       return res.status(200).json(adminSearch);
     }
 
-    const professionalFound = await Professional.findOne({ email: email });
+    const professionalFound = await Professional.findOne({
+      email: email,
+      types: types,
+    });
 
     if (!professionalFound) {
       return res.status(404).json({ message: "Usuario no encontrado" });
