@@ -109,7 +109,7 @@ Content-Type: application/json
 GET http://localhost:3001/ads/filters?profession=Carpintero&location=Cordoba
 Content-Type: application/json
 
-
+CiMdIp22#
 ### guardar un favorito
 POST http://localhost:3001/fav/save
 Content-Type: application/json
@@ -149,4 +149,8 @@ Content-Type: application/json
   "email": "martinjiro@gmail.com",
   "password": "Pass123"
 }
+
+### Comentarios
+GET  http://localhost:3001/comments
+Content-Type: application/json
 
