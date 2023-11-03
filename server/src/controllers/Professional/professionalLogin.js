@@ -5,6 +5,21 @@ const professionalLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    const adminSearch = await Admin.findOne({ email: email });
+
+    if (adminSearch) {
+      const passIsMatch = await bcryptjs.compare(
+        password,
+        adminSearch.password
+      );
+
+      if (!passIsMatch) {
+        return res.status(400).json({ message: "Password Incorrecto" });
+      }
+
+      return res.status(200).json(adminSearch);
+    }
+
     const professionalFound = await Professional.findOne({ email: email });
 
     if (!professionalFound) {

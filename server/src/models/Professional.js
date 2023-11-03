@@ -51,6 +51,10 @@ const professionalSchema = new mongoose.Schema({
   locationJob: {
     type: [String],
   },
+  types: {
+    type: String,
+    default: "professional",
+  },
 
   remoteWork: {
     type: Boolean,

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const pasportLocalMongoose = require("passport-local-mongoose");
 const findOrCreate = require("mongoose-findorcreate");
 
-
 const clientSchema = new mongoose.Schema({
   googleId: {
     type: String,
@@ -14,15 +13,13 @@ const clientSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-   
   },
   lastName: {
     type: String,
-    
   },
   userName: {
     type: String,
-    required: true, 
+    required: true,
     unique: true,
   },
   email: {
@@ -32,21 +29,23 @@ const clientSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    
   },
   image: {
     type: String,
   },
- 
-    province: {
-      type: String,
-      
-    },
-    location: {
-      type: String,
-      
-    },
-  
+
+  province: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+
+  types: {
+    type: String,
+    default: "client",
+  },
+
   isDeleted: {
     // Inicialmente, no se ha borrado lógicamente
     type: Boolean,
@@ -94,5 +93,3 @@ clientSchema.plugin(pasportLocalMongoose);
 clientSchema.plugin(findOrCreate);
 
 module.exports = mongoose.model("Client", clientSchema);
-
-

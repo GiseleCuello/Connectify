@@ -1,11 +1,27 @@
 const Client = require("../../models/Client");
+const Admin = require("../../models/Admin");
 const bcryptjs = require("bcryptjs");
 
 const clientLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, types } = req.body;
 
   try {
-    const clientSearch = await Client.findOne({ email: email });
+    const adminSearch = await Admin.findOne({ email: email });
+
+    if (adminSearch) {
+      const passIsMatch = await bcryptjs.compare(
+        password,
+        adminSearch.password
+      );
+
+      if (!passIsMatch) {
+        return res.status(400).json({ message: "Password Incorrecto" });
+      }
+
+      return res.status(200).json(adminSearch);
+    }
+
+    const clientSearch = await Client.findOne({ email: email, types: types });
 
     if (!clientSearch) {
       return res.status(404).json({ message: "Usuario no encontrado" });
