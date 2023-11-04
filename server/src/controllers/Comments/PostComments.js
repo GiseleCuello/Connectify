@@ -5,14 +5,16 @@ const Professional = require("../../models/Professional")
 
 const postComment = async (req, res) => {
   try {
-    const { comment, ranking, clientId, professionalId, status } = req.body;
-
+    const { comment, ranking, clientId, professionalId, approve, paymentId } = req.body;
+let clientField;
+    if(client){
     const payment = await Payments.findOne({
-      userName: clientId,
+      _id: paymentId,
+      clientId,
       professionalId,
       isCompleted: approve,
     });
-
+  }
     if (!payment) {
       return res.status(400).json({ error: "Will be realice a purchase" });
     }
