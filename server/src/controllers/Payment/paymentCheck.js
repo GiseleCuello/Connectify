@@ -4,7 +4,7 @@ const paymentCheck = async (req, res) => {
   try {
     const { paymentID } = req.params;
 
-    console.log("PAIMENT ID...", paymentID);
+    
 
     const existingPayment = await Payments.findOne({paymentID})
      
