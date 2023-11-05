@@ -5,7 +5,7 @@ const Professional = require("../../models/Professional")
 
 const postComment = async (req, res) => {
   try {
-    const { comment, client, professionalId, ranking, } = req.body;
+    const { comment, client, professionalId, rating } = req.body;
 
     // Busca al cliente por su nombre de usuario
     const clientDoc = await Client.findOne({ userName: client });
@@ -26,9 +26,17 @@ const postComment = async (req, res) => {
       return res.status(400).json({ error: "You are not authorized to leave a comment for this professional." });
     }
 
+    const existingComment = await Comment.findOne({
+      Client: clientDoc._id,
+      Professional: professionalId,
+    });
+
+    if (existingComment) {
+      return res.status(400).json({ error: "Ya has dejado un comentario para este profesional." });
+    }
     const newComment = new Comment({
       comment,
-      ranking,
+      rating,
       Client: clientDoc._id, // Asociamos al cliente por su ID
       Professional: professionalId, // Asociamos al profesional por su ID
     });
