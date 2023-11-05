@@ -5,26 +5,37 @@ const Professional = require("../../models/Professional")
 
 const postComment = async (req, res) => {
   try {
-    const { comment, ranking, clientId, professionalId, approve, paymentId } = req.body;
-let clientField;
-    if(client){
+    const { comment, client, professionalId, ranking, } = req.body;
+
+    // Busca al cliente por su nombre de usuario
+    const clientDoc = await Client.findOne({ userName: client });
+
+    if (!clientDoc) {
+      return res.status(400).json({ error: "Client not found." });
+    }
     const payment = await Payments.findOne({
-      _id: paymentId,
-      clientId,
-      professionalId,
-      isCompleted: approve,
+      
+        professionalId,
+        userName: client, // Compara el nombre de usuario en lugar del clientId
+        isCompleted: "approved",
+   
     });
-  }
+  
     if (!payment) {
-      return res.status(400).json({ error: "Will be realice a purchase" });
+      console.log(payment, 400)
+      return res.status(400).json({ error: "You are not authorized to leave a comment for this professional." });
     }
 
-    const newComment = await Comment.create({
+    const newComment = new Comment({
       comment,
       ranking,
-      Client: clientId,
-      Professional: professionalId,
+      Client: clientDoc._id, // Asociamos al cliente por su ID
+      Professional: professionalId, // Asociamos al profesional por su ID
     });
+
+     // Guarda el comentario
+     await newComment.save();
+
     res.status(200).json(newComment);
   } catch (error) {
     res.status(500).json({ error: "Error creating comment", error });

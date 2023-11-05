@@ -19,11 +19,12 @@ const commentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  client: {
+  Client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Client',
+    
   },
-  professional: {
+  Professional: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Professional',
   },
