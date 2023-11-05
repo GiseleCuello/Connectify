@@ -51,12 +51,10 @@ const clientGoogleLogin = async (req, res) => {
         }
       });
 
-      res
-        .status(200)
-        .json({ message: "Usuario de Google registrado con éxito." });
+      res.status(200).json(newClient);
     } else {
       // Si el usuario ya existe, inicia sesión
-      res.status(200).json({ message: "Inicio de sesión exitoso." });
+      res.status(200).json(existingClient);
     }
   } catch (error) {
     res
