@@ -1,4 +1,4 @@
-const NewAd = require("../../models/NewAd");
+const NewAd = require('../../models/NewAd');
 
 const filtersCombined = async (req, res) => {
   try {
@@ -19,19 +19,25 @@ const filtersCombined = async (req, res) => {
       filterConditions.profession = req.query.profession;
     }
 
+    if (req.query.workLocation === 'Remoto') {
+      filterConditions.workLocation = req.query.workLocation;
+    } else if (req.query.workLocation === 'Presencial') {
+      filterConditions.workLocation = req.query.workLocation;
+    }
+
     let query = NewAd.find(filterConditions);
 
-    if (req.query.sortPrice === "asc") {
+    if (req.query.sortPrice === 'asc') {
       query = query.sort({ price: 1 });
-    } else if (req.query.sortPrice === "desc") {
+    } else if (req.query.sortPrice === 'desc') {
       query = query.sort({ price: -1 });
     }
 
-    const ads = await query.populate("creator").exec();
+    const ads = await query.populate('creator').exec();
 
     res.json(ads);
   } catch (err) {
-    res.status(500).json({ error: "Error al obtener los anuncios" });
+    res.status(500).json({ error: 'Error al obtener los anuncios' });
   }
 };
 
