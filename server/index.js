@@ -28,20 +28,9 @@ const io = new Server(httpServer, {
     allowedHeaders: ['Content-Type'],
   },
 });
-
-io.on('connection', (socket) => {
-  console.log('Client connected');
-
-  socket.on('message', (message, nickname) => {
-    socket.broadcast.emit('message', {
-      body: message,
-      from: nickname,
-    });
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    });
-  });
-});
+// importaciones para que funcione socket.io en otro archivo
+const socketChat = require('./src/controllers/Utils/Socket.io/ChatSocket');
+socketChat(io);
 
 httpServer.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
