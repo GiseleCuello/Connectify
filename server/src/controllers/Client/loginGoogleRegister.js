@@ -5,6 +5,21 @@ const clientGoogleLogin = async (req, res) => {
   const { email } = req.body;
 
   try {
+    const adminSearch = await Admin.findOne({ email: email });
+
+    if (adminSearch) {
+      const passIsMatch = await bcryptjs.compare(
+        password,
+        adminSearch.password
+      );
+
+      if (!passIsMatch) {
+        return res.status(400).json({ message: "Password Incorrecto" });
+      }
+
+      return res.status(200).json(adminSearch);
+    }
+
     // Verifica si el mail ya existe en la base de datos
     const existingClient = await Client.findOne({ email });
 
