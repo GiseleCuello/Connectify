@@ -24,7 +24,11 @@ const clientLogin = async (req, res) => {
     const clientSearch = await Client.findOne({ email: email, types: types });
 
     if (!clientSearch) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+      return res.status(404).json({ message: "Email incorrecto" });
+    }
+
+    if (clientSearch.isGoogleUser) {
+      return res.status(200).json({ message: "Ha iniciado sesion con Google" });
     }
 
     const passIsMatch = await bcryptjs.compare(password, clientSearch.password);
