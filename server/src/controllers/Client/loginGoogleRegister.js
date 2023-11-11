@@ -1,4 +1,5 @@
 const Client = require("../../models/Client");
+const Admin = require("../../models/Admin");
 const nodemailer = require("nodemailer");
 
 const clientGoogleLogin = async (req, res) => {
@@ -8,15 +9,6 @@ const clientGoogleLogin = async (req, res) => {
     const adminSearch = await Admin.findOne({ email: email });
 
     if (adminSearch) {
-      const passIsMatch = await bcryptjs.compare(
-        password,
-        adminSearch.password
-      );
-
-      if (!passIsMatch) {
-        return res.status(400).json({ message: "Password Incorrecto" });
-      }
-
       return res.status(200).json(adminSearch);
     }
 
