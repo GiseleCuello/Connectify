@@ -1,13 +1,16 @@
 const Professional = require('../../models/Professional');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
+const EmailConnectify = process.env.MAIL;
+const PasswordConnectify = process.env.PASSWORDMAIL;
 
 // Configuración de nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'connectify2023@gmail.com',
-    pass: 'Connectify',
+    user: EmailConnectify,
+    pass: PasswordConnectify,
   },
 });
 
@@ -36,10 +39,18 @@ const RequestRecoveryPassword = async (req, res) => {
 
     // Configuración del correo electrónico
     const mailOptions = {
-      from: 'connectify2023@gmail.com',
+      from: EmailConnectify,
       to: professional.email,
       subject: 'Recuperación de contraseña',
-      text: `Utiliza el siguiente enlace para restablecer tu contraseña: http://localhost:5173/recovery/reset-password/${tokenRecovery}`,
+      html: `
+        <p>Hola ${professional.name},</p>
+        <p>Has solicitado restablecer tu contraseña en Connectify. Utiliza el siguiente enlace para completar el proceso:</p>
+        <p><a href="http://localhost:5173/recovery/reset-password/${tokenRecovery}">Restablecer Contraseña</a></p>
+        <p>Este enlace es válido por 1 hora.</p>
+        <p>Si no solicitaste este restablecimiento, ignora este correo electrónico.</p>
+        <p>Gracias,</p>
+        <p>El equipo de Connectify</p>
+    `,
     };
 
     // Enviar correo electrónico
