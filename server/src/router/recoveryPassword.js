@@ -1,12 +1,26 @@
 const recoveryPassword = require('express').Router();
 const {
-  ResetPassword,
-} = require('../controllers/PasswordRecovery/PasswordRecovery');
-const {
-  RequestRecoveryPassword,
-} = require('../controllers/PasswordRecovery/PasswordRecovery');
+  ProfessionalResetPassword,
+  ProfessionalRequestRecoveryPassword,
+} = require('../controllers/PasswordRecovery/ProfessionalPassword');
 
-recoveryPassword.post('/request-recovery-password', RequestRecoveryPassword);
-recoveryPassword.post('/reset-password', ResetPassword);
+const {
+  ClientResetPassword,
+  ClientRequestRecoveryPassword,
+} = require('./../controllers/PasswordRecovery/ClientPassword');
+
+recoveryPassword.post(
+  '/professional/request-recovery-password',
+  ProfessionalRequestRecoveryPassword
+);
+recoveryPassword.post(
+  '/professional/reset-password',
+  ProfessionalResetPassword
+);
+recoveryPassword.post(
+  '/client/request-recovery-password',
+  ClientRequestRecoveryPassword
+);
+recoveryPassword.post('/client/reset-password', ClientResetPassword);
 
 module.exports = recoveryPassword;

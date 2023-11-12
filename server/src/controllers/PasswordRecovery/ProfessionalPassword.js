@@ -22,7 +22,7 @@ const generarToken = (userId) => {
   return jwt.sign(payload, secretKey, options);
 };
 
-const RequestRecoveryPassword = async (req, res) => {
+const ProfessionalRequestRecoveryPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const professional = await Professional.findOne({ email });
@@ -69,7 +69,7 @@ const RequestRecoveryPassword = async (req, res) => {
   }
 };
 
-const ResetPassword = async (req, res) => {
+const ProfessionalResetPassword = async (req, res) => {
   try {
     const { tokenRecovery, NewPassword } = req.body;
 
@@ -95,6 +95,6 @@ const ResetPassword = async (req, res) => {
 };
 
 module.exports = {
-  ResetPassword,
-  RequestRecoveryPassword,
+  ProfessionalResetPassword,
+  ProfessionalRequestRecoveryPassword,
 };
