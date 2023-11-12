@@ -4,8 +4,6 @@ const paymentsByUser = async (req, res) => {
   try {
     const { userName } = req.params;
 
-    console.log(userName);
-
     const payments = await Payments.find({ userName: userName })
       .populate({
         path: "professionalId",

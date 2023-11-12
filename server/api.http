@@ -154,3 +154,21 @@ Content-Type: application/json
 GET  http://localhost:3001/comments
 Content-Type: application/json
 
+
+### Pagos SEARCH
+GET http://localhost:3001/payments/search/martinjiro22
+
+### PAGOS REGISTRO
+POST http://localhost:3001/payments/register
+Content-Type: application/json
+
+{
+  "userName": "martinjiro22",
+  "professionalId": "653bc205e4f42ed113e6a3ff",
+  "date": "2023-11-12T17:48:28.096Z",
+  "isCompleted": "approved",
+  "paymentID": "1315795864"
+}
+
+### PAGOS CHECK
+GET http://localhost:3001/payments/
