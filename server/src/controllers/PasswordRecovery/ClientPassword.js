@@ -45,7 +45,7 @@ const ClientRequestRecoveryPassword = async (req, res) => {
       html: `
         <p>Hola ${client.name},</p>
         <p>Has solicitado restablecer tu contraseña en Connectify. Utiliza el siguiente enlace para completar el proceso:</p>
-        <p><a href="http://localhost:5173/recovery/reset-password/${tokenRecovery}">Restablecer Contraseña</a></p>
+        <p><a href="http://localhost:5173/reset-password?token=${tokenRecovery}">Restablecer Contraseña</a></p>
         <p>Este enlace es válido por 1 hora.</p>
         <p>Si no solicitaste este restablecimiento, ignora este correo electrónico.</p>
         <p>Gracias,</p>
@@ -57,15 +57,18 @@ const ClientRequestRecoveryPassword = async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error al enviar el correo electrónico:', error);
-        res.status(500).json({ mensaje: 'Error interno del servidor' });
+        res.status(500).json({ message: 'Error interno del servidor' });
       } else {
         console.log('Correo electrónico enviado: ' + info.response);
-        res.status(200).json({ mensaje: 'Correo electrónico enviado' });
+        res.status(200).json({
+          message:
+            'Hemos enviado un enlace para restablecer tu contraseña a tu dirección de correo electrónico. Por favor, revisa tu bandeja de entrada y sigue las instrucciones proporcionadas en el correo para completar el proceso de restablecimiento de contraseña.',
+        });
       }
     });
   } catch (error) {
     console.error('Error al solicitar recuperación de contraseña:', error);
-    res.status(500).json({ mensaje: 'Error interno del servidor' });
+    res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
 
@@ -87,7 +90,10 @@ const ClientResetPassword = async (req, res) => {
     client.expiresIn = null;
     await client.save();
 
-    res.status(200).json({ message: 'Contraseña restablecida con éxito' });
+    res.status(200).json({
+      message:
+        '¡Contraseña restablecida con éxito! Puedes iniciar sesión con tu nueva contraseña.',
+    });
   } catch (error) {
     console.error('Error al restablecer la contraseña:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
