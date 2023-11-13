@@ -4,8 +4,6 @@ const Client = require("../../models/Client");
 const { sendPurchaseNotification } = require("../Utils/PurchaseSocket");
 
 const paymentsRegister = async (req, res) => {
-  console.log("DATOS register...", req.body);
-
   try {
     const { userName, professionalId, date, isCompleted, paymentID } = req.body;
 
