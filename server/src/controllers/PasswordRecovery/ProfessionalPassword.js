@@ -45,7 +45,7 @@ const ProfessionalRequestRecoveryPassword = async (req, res) => {
       html: `
         <p>Hola ${professional.name},</p>
         <p>Has solicitado restablecer tu contraseña en Connectify. Utiliza el siguiente enlace para completar el proceso:</p>
-        <p><a href="http://localhost:5173/recovery/reset-password/${tokenRecovery}">Restablecer Contraseña</a></p>
+        <p><a href="http://localhost:5173/reset-password?token=${tokenRecovery}">Restablecer Contraseña</a></p>
         <p>Este enlace es válido por 1 hora.</p>
         <p>Si no solicitaste este restablecimiento, ignora este correo electrónico.</p>
         <p>Gracias,</p>
