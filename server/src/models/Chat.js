@@ -9,6 +9,10 @@ const messageSchema = new Schema({
   from: {
     type: String,
   },
+  timestamp: {
+    type: Number,
+    default: Math.floor(Date.now() / 1000),
+  },
 });
 
 module.exports = mongoose.model('Message', messageSchema);
