@@ -1,12 +1,13 @@
 const Message = require('../../models/Chat');
 
 const saveMessage = async (req, res) => {
-  const { message, from } = req.body;
+  const { message, from, image } = req.body;
 
   try {
     const messageObj = new Message({
       message: message,
       from: from,
+      image: image,
     });
 
     await messageObj.save();

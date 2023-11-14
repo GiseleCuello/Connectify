@@ -13,6 +13,9 @@ const messageSchema = new Schema({
     type: Number,
     default: Math.floor(Date.now() / 1000),
   },
+  image: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Message', messageSchema);
