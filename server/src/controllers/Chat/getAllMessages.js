@@ -10,7 +10,17 @@ const getMessages = async (req, res) => {
       });
     }
 
-    res.status(200).json(messages);
+    // Mapear los mensajes para enviar la información del usuario al cliente
+    const messagesWithUserInfo = messages.map((message) => {
+      return {
+        message: message.message,
+        from: message.from,
+        image: message.image,
+        timestamp: message.timestamp,
+      };
+    });
+
+    res.status(200).json(messagesWithUserInfo);
   } catch (error) {
     console.error(error);
     res.status(500).json({
