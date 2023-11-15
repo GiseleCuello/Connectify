@@ -2,7 +2,7 @@ const Message = require('../../models/Chat');
 
 const getMessages = async (req, res) => {
   try {
-    const messages = await Message.find({}).sort({ _id: -1 }).exec();
+    const messages = await Message.find({}).sort({ timestamp: 1 }).exec();
 
     if (!messages || messages.length === 0) {
       return res.status(404).json({
