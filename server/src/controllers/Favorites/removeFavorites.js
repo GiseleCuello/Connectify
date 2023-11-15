@@ -17,7 +17,9 @@ const removeFavorite = async (req, res) => {
 
     const result = await Favorites.deleteOne({ _id: existingFavorite._id });
 
-    const newFavorite = await Favorites.find().populate("professional").exec();
+    const newFavorite = await Favorites.find({ client: clientId })
+      .populate("professional")
+      .exec();
 
     res.status(200).json(newFavorite);
   } catch (error) {
