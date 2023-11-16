@@ -5,8 +5,11 @@ const getAdById = require('../controllers/Ads/getAdById');
 const updateAdById = require('../controllers/Ads/updateAdById');
 const deleteAdById = require('../controllers/Ads/deleteAdById');
 const filtersCombined = require('../controllers/Filters/FiltersCombined');
+const getAdsTrue = require('../controllers/Ads/getAdsTrue');
 
 adsRoute.post('/', createAd); // Guarda los avisos desde la base de datos
+
+adsRoute.get('/anunciosAdmin', getAdsTrue); // Borrado lógico los avisos desde la base de datos)
 
 adsRoute.get('/', getAllAds); // Trae los avisos desde la base de datos
 
