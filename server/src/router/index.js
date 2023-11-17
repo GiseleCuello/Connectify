@@ -11,6 +11,7 @@ const favoritesRoute = require('./favoritesRoute');
 const payment = require('mercadopago');
 const paymentsRoute = require('./paymentsRoute');
 const recoveryPassword = require('./recoveryPassword');
+const messageAdmin = require('./contactAdminRouter');
 
 router.use('/client', clientRoute);
 
@@ -33,6 +34,8 @@ router.use('/recovery', recoveryPassword);
 // router.post("/purchase", postSocket);
 
 // router.get("/purchase", postSocket);
+
+router.use('/contact', messageAdmin);
 
 router.use('/payments', paymentsRoute);
 
